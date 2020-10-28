@@ -1,0 +1,77 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "调试服务器",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"start",
+				"--slient"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"/**",
+				"node_modules/mocha/**",
+				"node_modules/ts-node/**",
+				"node_modules/v8-compile-cache/**"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "调试测试用例(当前文件)",
+			"runtimeExecutable": "mocha",
+			"runtimeArgs": [
+				"-r",
+				"ts-node/register/transpile-only",
+				"--ui",
+				"exports",
+				"--colors",
+				"--no-timeout",
+				"${relativeFile}"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"/**",
+				"node_modules/mocha/**",
+				"node_modules/ts-node/**",
+				"node_modules/v8-compile-cache/**"
+			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "调试测试用例",
+			"runtimeExecutable": "mocha",
+			"runtimeArgs": [
+				"-r",
+				"ts-node/register/transpile-only",
+				"--ui",
+				"exports",
+				"--colors",
+				"--no-timeout",
+				"${workspaceFolder}/**/*.test.ts"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"/**",
+				"node_modules/mocha/**",
+				"node_modules/ts-node/**",
+				"node_modules/v8-compile-cache/**"
+			]
+		},
+		{
+			"type": "node",
+			"request": "attach",
+			"name": "附加到进程",
+			"skipFiles": [
+				"/**",
+				"node_modules/mocha/**",
+				"node_modules/ts-node/**",
+				"node_modules/v8-compile-cache/**"
+			]
+		}
+	]
+}

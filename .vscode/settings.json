@@ -1,0 +1,14 @@
+{
+	"editor.insertSpaces": false,
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2
+	},
+	"tslint.configFile": ".vscode/tslint.json",
+	"tslint.exclude": "**/*.test.*",
+	"tslint.alwaysShowRuleFailuresAsWarnings": true,
+	"tslint.suppressWhileTypeErrorsPresent": false,
+	"sasslint.enable": true,
+	"sasslint.configFile": ".vscode/.sass-lint.yml",
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+}
