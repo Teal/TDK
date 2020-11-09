@@ -1,0 +1,1 @@
+DOC.setPageIndexData([{"title":"doc","url":"doc.html"},{"title":"icons","url":"icons.html"},{"title":"qrcode","url":"qrcode.html"},{"title":"qunit","url":"qunit.html"},{"title":"require","url":"require.html"},{"title":"unittest","url":"unittest.html"}]);

@@ -1,0 +1,1 @@
+{"version":3,"file":"testIndex.js","sourceRoot":"","sources":["../mockup/data/testIndex.js"],"names":[],"mappings":"AAAA,GAAG,CAAC,cAAc,CAAC;IAClB,yBAAyB;CACzB,CAAC,CAAA","sourcesContent":["DOC.renderUnitTest([\r\n\t\"mockup/data/sample.test\"\r\n])"]}

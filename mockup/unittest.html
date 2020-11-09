@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="doc-page doc-page-dev">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>单元测试</title>
+	<link rel="stylesheet" href="../assets/doc.css">
+	<link rel="stylesheet" href="../assets/qunit.css">
+	<script src="../assets/require.js"></script>
+	<script>
+		var DOC_PAGE_DATA = {
+			pageIndexRoot: "",
+			searchIndexURL: "mockup/data/searchIndex.js",
+			ajaxLoading: false
+		}
+	</script>
+	<script src="../assets/doc.js" defer></script>
+	<script src="../assets/qunit.js" defer></script>
+	<script src="../assets/unittest.js" defer></script>
+	<script src="data/testIndex.js" defer></script>
+</head>
+<body>
+	<header class="doc-section doc-header">
+		<button type="button" aria-label="主菜单" class="doc-navbutton doc-navbutton-navbar" onclick="DOC.toggleNavbar()">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#menu"></use>
+			</svg>
+		</button>
+		<a href="index.html" class="doc-logo">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#logo"></use>
+			</svg>
+			<span class="doc-logo-title">TealUI</span>
+		</a>
+		<div class="doc-version doc-popup-trigger">
+			<a>
+				1.0.0
+				<svg class="doc-icon doc-icon-space-left">
+					<use xlink:href="../assets/icons.svg#chevron-down"></use>
+				</svg>
+			</a>
+			<ul class="doc-menu doc-popup doc-arrow">
+				<li><a href="###" target="_blank">0.4.0</a></li>
+				<li><a href="###" target="_blank">0.3.0</a></li>
+				<li><a href="###" target="_blank">0.2.0</a></li>
+			</ul>
+		</div>
+		<nav class="doc-navbar">
+			<ul>
+				<li><a href="doc.html">文档</a></li>
+				<li><a href="doc.html">组件</a></li>
+				<li class="doc-selected"><a href="unittest.html">示例</a></li>
+				<li><a href="doc.html">下载</a></li>
+				<li class="doc-popup-trigger">
+					<a>
+						支持
+						<svg class="doc-icon doc-icon-space-left">
+							<use xlink:href="../assets/icons.svg#chevron-down"></use>
+						</svg>
+					</a>
+					<ul class="doc-menu doc-popup">
+						<li><a href="###" target="_blank">链接1</a></li>
+						<li><a href="###" target="_blank">链接2</a></li>
+						<li><a href="###" target="_blank">链接3</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<div class="doc-locale doc-popup-trigger">
+			<a>
+				中文(简体)
+				<svg class="doc-icon doc-icon-space-left">
+					<use xlink:href="../assets/icons.svg#chevron-down"></use>
+				</svg>
+			</a>
+			<ul class="doc-menu doc-popup doc-arrow">
+				<li class="doc-selected"><a href="###">中文(简体)</a></li>
+				<li><a href="###">English</a></li>
+			</ul>
+		</div>
+		<div class="doc-search">
+			<input type="search" placeholder="搜索(Shift+Alt+F)" autocomplete="off" accesskey="f" oninput="DOC.showSearchResult(); DOC.updateSearchResult()" onfocus="DOC.showSearchResult()" onkeydown="DOC.handleSearchKeyDown(event)" />
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#search"></use>
+			</svg>
+		</div>
+		<a href="###" target="_blank" class="doc-external">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#github"></use>
+			</svg>
+		</a>
+		<button type="button" aria-label="搜索" class="doc-navbutton doc-navbutton-search" onclick="DOC.toggleSearch()">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#search"></use>
+			</svg>
+		</button>
+		<button type="button" aria-label="列表" class="doc-navbutton doc-navbutton-sidebar" onclick="DOC.toggleSidebar()">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#sidebar"></use>
+			</svg>
+		</button>
+	</header>
+	<main class="doc-body">
+		<article class="doc-article">
+			<div id="qunit">
+				<span class="doc-tip"><span class="doc-spinner doc-icon-space-right"></span>正在载入测试用例...</span>
+			</div>
+			<div id="qunit-fixture"></div>
+		</article>
+		<div class="doc-section doc-back-to-top">
+			<a href="#" title="返回顶部" onclick="DOC.backToTop(); return false;">
+				<svg class="doc-icon">
+					<use xlink:href="../assets/icons.svg#top"></use>
+				</svg>
+			</a>
+		</div>
+	</main>
+	<footer class="doc-section doc-footer">
+		<div class="doc-links">
+			<a href="###">反馈建议</a> |
+			<a href="###">贡献指南</a> |
+			<a href="###">在线讨论</a>
+		</div>
+		<div class="doc-copyright">&copy; 2011-2020 The Teal Team.</div>
+	</footer>
+	<script>
+		// 删除页面中影响布局的空白
+		var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+		while (walker.nextNode()) {
+			walker.currentNode.textContent = walker.currentNode.textContent.replace(/^([ \t]*)(?:\n[ \t]*)+/, "$1").replace(/(?:\n[ \t]*)+$/, "")
+			if (walker.currentNode.parentNode.tagName === "PRE" && !walker.currentNode.textContent.trim()) {
+				walker.currentNode.textContent = walker.currentNode.textContent.trim()
+			}
+		}
+	</script>
+</body>
+</html>

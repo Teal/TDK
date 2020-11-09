@@ -1,0 +1,1 @@
+{"version":3,"file":"o.test.js","sourceRoot":"","sources":["../o.test.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;IAGA,SAAgB,SAAS;QACxB,MAAM,CAAC,WAAW,CAAC,SAAI,EAAE,CAAC,CAAC,CAAA;IAC5B,CAAC;IAFD,8BAEC","sourcesContent":["import * as assert from \"assert\"\r\nimport { word } from \"./ts\"\r\n\r\nexport function helloTest() {\r\n\tassert.strictEqual(word, 1)\r\n}"]}

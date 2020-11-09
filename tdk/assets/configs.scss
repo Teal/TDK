@@ -1,0 +1,42 @@
+$doc-primary-color: #29a39f;
+$doc-secondary-color: #fc9153;
+
+$doc-text-color: #262626;
+$doc-tip-color: #999;
+$doc-border-color: #e1e4e8;
+
+$doc-header-background-color: #f7f8f9;
+$doc-body-background-color: #fff;
+$doc-hover-background-color: #f2f3f4;
+
+$doc-success-color: #46a716;
+$doc-info-color: #147ad9;
+$doc-warning-color: #de980d;
+$doc-error-color: #d01d26;
+
+$doc-header-height: 3.75rem;
+$doc-body-padding: 2.5rem;
+$doc-sidebar-width: 18.5rem;
+$doc-content-width: 42.5rem;
+$doc-toc-width: 11rem;
+
+$doc-border-radius: .2rem;
+$doc-duration: .2s;
+
+$doc-screen-large: 1024px;
+$doc-screen-small: 768px;
+
+// 返回一个更深的颜色
+@function shade($color, $amount: 10%) {
+	@return mix(#000, $color, $amount);
+}
+
+// 返回一个更浅的颜色
+@function tint($color, $amount: 20%) {
+	@return mix(#fff, $color, $amount);
+}
+
+// 返回和指定颜色对比度最大的颜色
+@function contrast($color: $doc-primary-color, $color-dark: $doc-text-color, $color-light: #fff, $threshold: 72%) {
+	@return if(lightness($color) < $threshold, $color-light, $color-dark);
+}

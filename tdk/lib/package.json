@@ -1,0 +1,70 @@
+{
+  "name": "tdk",
+  "version": "0.0.1-alpha.2",
+  "repository": "https://github.com/Teal/TDK",
+  "description": "零配置的前端组件化解决方案，提供 API 文档生成、在线演示、自动化测试等功能",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "xuld <xuld@xuld.net>",
+  "engines": {
+    "node": ">=10.12"
+  },
+  "bin": {
+    "tdk": "dist/cli.js"
+  },
+  "dependencies": {
+    "fast-pinyin": "^0.0.1",
+    "h2server": "^0.3.0",
+    "js-yaml": "^3.14.0",
+    "markdown-it": "^12.0.2",
+    "markdown-it-multimd-table": "^4.0.3",
+    "prismjs": "^1.22.0",
+    "tutils": "^2.1.2",
+    "typescript": "^4.0.5",
+    "uslug": "^1.0.4"
+  },
+  "optionalDependencies": {
+    "less": "^3.10.3",
+    "memory-fs": "^0.4.1",
+    "node-sass": "^4.12.0",
+    "webpack": "^5.0.0-beta.3",
+    "sax": "^1.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.6",
+    "@types/markdown-it": "^10.0.2",
+    "@types/prismjs": "^1.16.2",
+    "@types/uslug": "^1.0.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "ts-node": "^9.0.0",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "ts-node -T ./src/cli.ts start",
+    "prepublishOnly": "npm run build",
+    "build": "tsc -p tsconfig.json --declaration",
+    "watch": "nodemon -e ts,tsx,json -T ./src/cli.ts start",
+    "tdk": "ts-node -T ./src/cli.ts ",
+    "test": "mocha -r ts-node/register/transpile-only --ui exports **/*.test.ts",
+    "coverage": "node -e \"process.argv[8] = require.resolve('mocha/bin/mocha'); if (process.argv[14]) { process.argv[13] = process.argv[14].replace(/^src([\\\\/].*)\\.ts/, 'test$' + '1.test.ts'); process.argv.splice(14, 1) } require('nyc/bin/nyc')\" nyc --reporter=text-summary --reporter=html --report-dir=coverage --temp-dir=coverage/.nyc_output --extension=.ts --include=src/** mocha -r ts-node/register/transpile-only --ui exports **/*.test.ts"
+  },
+  "tdk": {
+    "outDir": "_gh_pages",
+    "doc": {
+      "displayName": "TDK",
+      "introButtons": [
+        {
+          "label": "了解更多",
+          "href": "docs/introduction.html"
+        }
+      ],
+      "features": []
+    },
+    "build": {
+      "doc": {
+        "baseURL": "/TDK/",
+        "injectFoot": "<script>var _hmt = _hmt || [];(function() { var hm = document.createElement(\"script\"); hm.src = \"https://hm.baidu.com/hm.js?e87106e91bf2099d61880bb0b4071413\"; var s = document.getElementsByTagName(\"script\")[0];  s.parentNode.insertBefore(hm, s);  })(); </script>"
+      }
+    }
+  }
+}
