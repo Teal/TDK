@@ -2,7 +2,7 @@ import { formatCodeFrame } from "tutils/ansi"
 import { FileSystem } from "tutils/fileSystem"
 import { LogEntry, Logger, LoggerOptions } from "tutils/logger"
 import { Matcher, Pattern } from "tutils/matcher"
-import { concat, formatHRTime } from "tutils/misc"
+import { concat, formatHRTime, merge } from "tutils/misc"
 import { containsPath, getDir, getExt, getName, isAbsolutePath, joinPath, pathEquals, relativePath, resolvePath, setExt, setName } from "tutils/path"
 import { pathToFileURL } from "url"
 import { DocCompiler, DocCompilerOptions } from "./compilers/docCompiler"
@@ -984,37 +984,4 @@ export const enum AssetUpdateType {
 	changed,
 	/** 资源被删除 */
 	deleted,
-}
-
-/**
- * 合并所有对象，如果两个对象包含同名的数组，则将这些数组合并为一个
- * @param target 要合并的目标对象
- * @param sources 要合并的源对象
- * @example merge({x: [0], y: 0}, {x: [1], y: 2}) // {x: [0, 1], y: 2}
- */
-function merge<T, S>(target: T, ...sources: S[]) {
-	const cloned = new Map()
-	for (const source of sources) {
-		target = merge(target, source)
-	}
-	return target
-
-	function merge(target: any, source: any) {
-		if (typeof target === "object" && typeof source === "object") {
-			if (Array.isArray(target) && Array.isArray(source)) {
-				return [...target, ...source]
-			}
-			const exists = cloned.get(source)
-			if (exists !== undefined) {
-				return exists
-			}
-			const result: { [key: string]: any } = { ...target }
-			cloned.set(source, result)
-			for (const key in source) {
-				result[key] = merge(result[key], source[key])
-			}
-			return result
-		}
-		return source
-	}
 }
