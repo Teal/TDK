@@ -130,7 +130,7 @@ export class Builder {
 		options = Object.assign(this.options, options)
 		this.devServer = devServer
 		if (!devServer) {
-			this.options = options = merge(options, options.build)
+			this.options = options = merge(options, options.build) || options
 		}
 		options.baseDir = resolvePath(options.baseDir)
 		options.srcDir = resolvePath(options.baseDir, options.srcDir)

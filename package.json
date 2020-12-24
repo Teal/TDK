@@ -1,6 +1,6 @@
 {
   "name": "tdk",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1",
   "repository": "https://github.com/Teal/TDK",
   "description": "零配置的前端组件化解决方案，提供 API 文档生成、在线演示、自动化测试等功能",
   "license": "SEE LICENSE IN LICENSE",
@@ -18,7 +18,7 @@
     "markdown-it": "^12.0.4",
     "markdown-it-multimd-table": "^4.0.3",
     "prismjs": "^1.22.0",
-    "tutils": "^2.1.3",
+    "tutils": "^2.1.4",
     "typescript": "^4.1.3",
     "uslug": "^1.0.4"
   },
