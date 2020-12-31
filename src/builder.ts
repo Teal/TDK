@@ -550,9 +550,9 @@ export class Builder {
 		const dirs = [this.options.baseDir, this.options.assetsDir, this.options.srcDir]
 		for (let i = 0; i < dirs.length; i++) {
 			await this.fs.walk(dirs[i], {
-				dir: path => !this.isIgnored(path),
+				dir: path => i === 1 || !this.isIgnored(path),
 				file: path => {
-					if (this.isIgnored(path) || rootDir && !containsPath(rootDir, path, this.fs.isCaseInsensitive)) {
+					if (i !== 1 && this.isIgnored(path) || rootDir && !containsPath(rootDir, path, this.fs.isCaseInsensitive)) {
 						return false
 					}
 					let url = relativePath(i === 1 ? this.options.assetsDir : this.options.baseDir, path)
@@ -646,6 +646,12 @@ export class Builder {
 				dependencies: compileResult.dependencies
 			}
 			outPath = setExt(outPath, ".js")
+			if (compileResult.declaration) {
+				const declarationPath = setExt(outPath, ".d.ts")
+				const task = this.logger.begin(`正在写入 ${this.logger.formatPath(declarationPath)}`)
+				await this.fs.writeFile(declarationPath, compileResult.declaration)
+				this.logger.end(task)
+			}
 		} else if (getName(url).toLowerCase() === "package.json") {
 			const path = this.toPath(url)
 			const content = await this.fs.readText(path)
