@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="doc-page doc-page-dev">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>文档页</title>
+	<link rel="stylesheet" href="../assets/doc.css">
+	<script src="../assets/require.js"></script>
+	<script>
+		var DOC_PAGE_DATA = {
+			pageIndexRoot: "",
+			searchIndexURL: "mockup/data/searchIndex.js"
+		}
+	</script>
+	<script src="../assets/doc.js" defer></script>
+	<script src="./data/pageIndex.js" defer></script>
+</head>
+<body>
+	<header class="doc-section doc-header">
+		<button type="button" aria-label="主菜单" class="doc-navbutton doc-navbutton-navbar" onclick="DOC.toggleNavbar()">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#menu"></use>
+			</svg>
+		</button>
+		<a href="index.html" class="doc-logo">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#logo"></use>
+			</svg>
+			<span class="doc-logo-title">TealUI</span>
+		</a>
+		<div class="doc-version doc-popup-trigger">
+			<a>
+				1.0.0
+				<svg class="doc-icon doc-icon-space-left">
+					<use xlink:href="../assets/icons.svg#chevron-down"></use>
+				</svg>
+			</a>
+			<ul class="doc-menu doc-popup doc-arrow">
+				<li><a href="###" target="_blank">0.4.0</a></li>
+				<li><a href="###" target="_blank">0.3.0</a></li>
+				<li><a href="###" target="_blank">0.2.0</a></li>
+			</ul>
+		</div>
+		<nav class="doc-navbar">
+			<ul>
+				<li><a href="doc.html">文档</a></li>
+				<li class="doc-selected"><a href="doc.html">组件</a></li>
+				<li><a href="unittest.html">示例</a></li>
+				<li><a href="doc.html">下载</a></li>
+				<li class="doc-popup-trigger">
+					<a>
+						支持
+						<svg class="doc-icon doc-icon-space-left">
+							<use xlink:href="../assets/icons.svg#chevron-down"></use>
+						</svg>
+					</a>
+					<ul class="doc-menu doc-popup">
+						<li><a href="###" target="_blank">链接1</a></li>
+						<li><a href="###" target="_blank">链接2</a></li>
+						<li><a href="###" target="_blank">链接3</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<div class="doc-locale doc-popup-trigger">
+			<a>
+				中文(简体)
+				<svg class="doc-icon doc-icon-space-left">
+					<use xlink:href="../assets/icons.svg#chevron-down"></use>
+				</svg>
+			</a>
+			<ul class="doc-menu doc-popup doc-arrow">
+				<li class="doc-selected"><a href="###">中文(简体)</a></li>
+				<li><a href="###">English</a></li>
+			</ul>
+		</div>
+		<div class="doc-search">
+			<input type="search" placeholder="搜索(Shift+Alt+F)" autocomplete="off" accesskey="f" oninput="DOC.showSearchResult(); DOC.updateSearchResult()" onfocus="DOC.showSearchResult()" onkeydown="DOC.handleSearchKeyDown(event)" />
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#search"></use>
+			</svg>
+			<menu class="doc-menu doc-popup">
+				<li><label class="doc-tip"><span class="doc-spinner doc-icon-space-right"></span>正在搜索...</label></li>
+				<li>
+					<label class="doc-tip">
+						<svg class="doc-icon">
+							<use xlink:href="../assets/icons.svg#info"></use>
+						</svg>
+						无匹配结果
+					</label>
+				</li>
+				<li><a href="###1"><mark>按</mark>钮<small>Button</small></a></li>
+				<li><a href="###2">文本<mark>框</mark><small>Button</small></a></li>
+				<li><a href="###3">文本框<small><mark>B</mark>utton</small></a></li>
+				<li class="doc-selected"><a href="###"><mark>按</mark>钮<small>Button</small></a></li>
+				<li><a href="###">按钮<small>Buttonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</small></a></li>
+				<li><a href="###">按钮长长长长长长长长长长长长长长长长<small>Buttonn</small></a></li>
+				<li><a href="###">按钮长长长长长长长长长长长长长长长长<small>Buttonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</small></a></li>
+				<li><a href="###">按钮<small><mark>But</mark>ton</small></a></li>
+			</menu>
+		</div>
+		<a href="###" target="_blank" class="doc-external">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#github"></use>
+			</svg>
+		</a>
+		<button type="button" aria-label="搜索" class="doc-navbutton doc-navbutton-search" onclick="DOC.toggleSearch()">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#search"></use>
+			</svg>
+		</button>
+		<button type="button" aria-label="列表" class="doc-navbutton doc-navbutton-sidebar" onclick="DOC.toggleSidebar()">
+			<svg class="doc-icon">
+				<use xlink:href="../assets/icons.svg#sidebar"></use>
+			</svg>
+		</button>
+		<div class="doc-progress" style="width: 3%;"></div>
+	</header>
+	<main class="doc-body">
+		<nav class="doc-section doc-sidebar">
+			<ul class="doc-menu doc-hide-scrollbar doc-navmenu" onclick="DOC.handleNavMenuClick(event)">
+				<li class="doc-navmenu-collapsible">
+					<button type="button">
+						<svg class="doc-icon doc-navmenu-collapse-indicator">
+							<use xlink:href="../assets/icons.svg#chevron-down"></use>
+						</svg>
+						UI 组件
+					</button>
+				</li>
+				<li class="doc-navmenu-child">
+					<ul>
+						<li class="doc-navmenu-collapsible">
+							<button type="button">
+								<svg class="doc-icon doc-navmenu-collapse-indicator">
+									<use xlink:href="../assets/icons.svg#chevron-down"></use>
+								</svg>
+								文本框
+							</button>
+						</li>
+						<li class="doc-navmenu-child">
+							<ul>
+								<li><a href="###">TextBox<small>基本文本框</small></a></li>
+								<li><a href="###">SearchBox<small>搜索框</small></a></li>
+								<li><a href="###">PasswordBox<small>密码框</small></a></li>
+							</ul>
+						</li>
+						<li class="doc-navmenu-collapsible doc-collapsed">
+							<button type="button">
+								<svg class="doc-icon doc-navmenu-collapse-indicator">
+									<use xlink:href="../assets/icons.svg#chevron-down"></use>
+								</svg>
+								菜单
+							</button>
+						</li>
+						<li class="doc-navmenu-collapsible doc-navmenu-current">
+							<button type="button">
+								<svg class="doc-icon doc-navmenu-collapse-indicator">
+									<use xlink:href="../assets/icons.svg#chevron-down"></use>
+								</svg>
+								按钮
+							</button>
+						</li>
+						<li class="doc-navmenu-child">
+							<ul>
+								<li class="doc-selected"><a href="###">Button<small>基本按钮</small></a></li>
+								<li><a href="###">LinkButton<small>链接按钮</small></a></li>
+								<li><a href="###">MenuButton<small>菜单按钮</small></a></li>
+								<li><a href="###">SplitButton<small>分割按钮</small></a></li>
+							</ul>
+						</li>
+						<li><a href="###">ProgressBar<small>进度条</small></a></li>
+						<li><a href="###">ProgressCircle<small>进度圈</small></a></li>
+					</ul>
+				</li>
+				<li class="doc-navmenu-collapsible doc-collapsed">
+					<button type="button">
+						<svg class="doc-icon doc-navmenu-collapse-indicator">
+							<use xlink:href="../assets/icons.svg#chevron-down"></use>
+						</svg>
+						工具函数
+					</button>
+				</li>
+				<li><a href="###">Other<small>很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</small></a></li>
+			</ul>
+		</nav>
+		<article class="doc-article">
+			<!--#DOC-ARTICLE-START-->
+			<div class="doc-article-has-toc">
+				<div class="doc-section doc-popup-trigger doc-article-tools">
+					<svg class="doc-icon">
+						<use xlink:href="../assets/icons.svg#ellipsis"></use>
+					</svg>
+					<menu class="doc-menu doc-popup doc-arrow">
+						<li>
+							<a href="###" target="_blank" accesskey="e">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#edit"></use>
+								</svg>
+								编辑此页(E)
+							</a>
+						</li>
+						<li>
+							<a href="###" target="_blank" accesskey="b">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#bug"></use>
+								</svg>
+								报告 BUG(B)
+							</a>
+						</li>
+						<li>
+							<a href="###" target="_blank" accesskey="v">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#code"></use>
+								</svg>
+								查看源码(V)
+							</a>
+						</li>
+						<li>
+							<a href="###" target="_blank" accesskey="d">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#download"></use>
+								</svg>
+								下载此组件(D)
+							</a>
+						</li>
+						<li class="doc-menu-divider">
+							<button type="button" onclick="DOC.handleQRCodeClick(this)" accesskey="q">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#qrcode"></use>
+								</svg>
+								二维码(Q)
+							</button>
+						</li>
+						<li>
+							<button type="button" onclick="DOC.handleToggleDemoCodeClick(this)" accesskey="c">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#terminal"></use>
+								</svg>
+								展开示例源码(C)
+							</button>
+						</li>
+						<li>
+							<button type="button" onclick="DOC.handleFullscreenClick(this)" accesskey="a">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#maximize"></use>
+								</svg>
+								全屏(A)
+							</button>
+						</li>
+						<li>
+							<button type="button" onclick="DOC.handleToggleDevMode(this)" accesskey="t">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#test"></use>
+								</svg>
+								显示自测用例(T)
+							</button>
+						</li>
+						<li>
+							<a href="unittest.html" accesskey="u">
+								<svg class="doc-icon doc-icon-space-right">
+									<use xlink:href="../assets/icons.svg#unittest"></use>
+								</svg>
+								单元测试(U)
+							</a>
+						</li>
+					</menu>
+				</div>
+				<h1 class="doc-section doc-article-title" id="组件名">
+					组件名
+					<small>zuJianMing</small>
+					<span class="doc-tag">移动端</span>
+					<span class="doc-tag doc-success">稳定版</span>
+				</h1>
+				<div class="doc-section doc-article-meta">
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="版本">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#history"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value doc-popup-trigger">
+							<span>
+								3.0.1(15分钟前)
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#chevron-down"></use>
+								</svg>
+							</span>
+							<ul class="doc-popup">
+								<li>3.0.1(15分钟前)</li>
+								<li>3.0.1(2018/8/13)</li>
+								<li>3.0.1(2018/8/13)</li>
+							</ul>
+						</div>
+					</div>
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="维护">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#maintainer"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value doc-popup-trigger">
+							<a>
+								小明先森
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#chevron-down"></use>
+								</svg>
+							</a>
+							<ul class="doc-popup">
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森长长长长长长长长长长长长</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+								<li><a href="###">小明先森</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="依赖">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#dependency"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value">
+							<span>2 依赖</span>
+						</div>
+					</div>
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="协议">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#license"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value">
+							<span>MIT</span>
+						</div>
+					</div>
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="文件大小">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#filesize"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value">
+							<span>3k</span>
+						</div>
+					</div>
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="推荐">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#thumbs-up"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value">
+							<span>10</span>
+						</div>
+					</div>
+					<div class="doc-article-meta-item">
+						<label class="doc-article-meta-label" title="不推荐">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#thumbs-down"></use>
+							</svg>
+						</label>
+						<div class="doc-article-meta-value">
+							<span>10</span>
+						</div>
+					</div>
+				</div>
+				<aside class="doc-section doc-toc doc-collapsed">
+					<nav class="doc-toc-container doc-hide-scrollbar">
+						<button type="button" class="doc-toc-title" onclick="DOC.toggleTOCCollapse()">
+							目录
+							<svg class="doc-icon doc-icon-space-left doc-toc-collapse-indicator">
+								<use xlink:href="../assets/icons.svg#chevron-down"></use>
+							</svg>
+						</button>
+						<ul class="doc-collapsed">
+							<li class="doc-toc-head"><a href="#组件名">组件名</a></li>
+							<li class="doc-selected">
+								<a href="#季姬击鸡记"><span class="doc-counter">一、</span>季姬击鸡记</a>
+								<ul>
+									<li><a href="#原文"><span class="doc-counter">1. </span>原文</a></li>
+									<li>
+										<a href="#译文"><span class="doc-counter">2. </span>译文</a>
+										<ul>
+											<li><a href="#译文版本一">译文版本一</a></li>
+											<li><a href="#译文版本二">译文版本二</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#列表和图表"><span class="doc-counter">二、</span>列表和图表</a>
+								<ul>
+									<li><a href="#列表"><span class="doc-counter">1. </span>列表</a></li>
+									<li><a href="#表格"><span class="doc-counter">2. </span>表格</a></li>
+									<li><a href="#图片"><span class="doc-counter">3. </span>图片</a></li>
+									<li><a href="#水平线"><span class="doc-counter">4. </span>水平线</a></li>
+								</ul>
+							</li>
+							<li><a href="#表单元素"><span class="doc-counter">三、</span>表单元素</a></li>
+							<li><a href="#引用"><span class="doc-counter">四、</span>引用</a></li>
+							<li><a href="#代码和演示"><span class="doc-counter">五、</span>代码和演示</a></li>
+							<li>
+								<a href="#API"><span class="doc-counter">六、</span>API</a>
+								<ul>
+									<li>
+										<a href="#Button">Button</a>
+										<ul>
+											<li><a href="#Button.class">class</a></li>
+											<li><a href="#Button.onClick">onClick</a></li>
+											<li><a href="#Button.setMenu">setMenu</a></li>
+											<li><a href="#Button.setMenu2">setMenu</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#列表和卡片"><span class="doc-counter">七、</span>列表和卡片</a>
+								<ul>
+									<li><a href="#列表2"><span class="doc-counter">1. </span>列表</a></li>
+									<li><a href="#卡片"><span class="doc-counter">2. </span>卡片</a></li>
+								</ul>
+							</li>
+							<li><a href="#选项卡"><span class="doc-counter">八、</span>选项卡</a></li>
+							<li><a href="#盒子"><span class="doc-counter">九、</span>盒子</a></li>
+							<li><a href="#很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长"><span class="doc-counter">十、</span>很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</a></li>
+						</ul>
+						<span class="doc-toc-anchor"></span>
+						<button type="button" title="展开更多" class="doc-toc-more" onclick="DOC.toggleTOCCollapse()">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#chevron-down"></use>
+							</svg>
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#ellipsis"></use>
+							</svg>
+						</button>
+					</nav>
+				</aside>
+				<div class="doc-section doc">
+					<h2 id="季姬击鸡记">
+						<a href="#季姬击鸡记" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">一、</span>
+						季姬击鸡记
+					</h2>
+					<h3 id="原文">
+						<a href="#原文" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">1. </span>
+						原文
+					</h3>
+					<p>季姬寂，集鸡，鸡即棘鸡。棘鸡饥叽，季姬及箕稷济鸡。鸡既济，跻姬笈，季姬忌，急咭鸡，鸡急，继圾几，季姬急，即籍箕击鸡，箕疾击几伎，伎即齑，鸡叽集几基，季姬急极屐击鸡，鸡既殛，季姬激，即记《季姬击鸡记》。</p>
+					<h3 id="译文">
+						<a href="#译文" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">2. </span>
+						译文
+					</h3>
+					<h4 id="译文版本一">
+						<a href="#译文版本一" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						译文版本一
+					</h4>
+					<p>季姬感到寂寞，罗集了一些鸡来养，是那种出自荆棘丛中的野鸡。野鸡饿了唧唧叫，季姬就拿竹箕中的小米喂它们。鸡吃饱了，跳到季姬的书箱上，季姬怕脏，忙赶鸡，鸡吓急了，就接着跳到桌子上，季姬更着急了，就借竹箕为赶鸡的工具，投击野鸡，竹箕的投速很快，却打中了几桌上的陶伎俑，那陶伎俑掉到地下，竟粉碎了。季姬睁眼一瞧，鸡躲在几桌下乱叫，季姬一怒之下，脱下木屐鞋来打鸡，把鸡打死了。想着养鸡的经过，季姬激动起来，就写了这篇《季姬击鸡记》。</p>
+					<h4 id="译文版本二">
+						<a href="#译文版本二" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						译文版本二
+					</h4>
+					<p>四姑娘(伯仲叔季，季为行四)为了排遣寂寞，于是豢养了一些鸡，那些鸡就是林地里的那种林鸡。林鸡饿了便唧唧叫起来，四姑娘于是用簸箕盛粟米给鸡喂食。鸡吃饱了，便跳到了四姑娘的衣箱上，四姑娘一看这不行啊，就急忙叫喊着轰鸡，鸡惊，继而又蹦到了案几上，四姑娘匆忙中，将手中的簸箕照着鸡就扔了过去，簸箕飞过砸中几个陶俑，陶俑摔得粉碎，鸡在案几底下不住惊叫，四姑娘情急之下抄起木鞋打鸡，鸡虽然被打死了，可四姑娘仍是心绪难平，于是便写下了《四姑娘打鸡的故事》。</p>
+					<h5>赵元任<small>(作者)</small></h5>
+					<p>现代著名<a href="doc.html?1">学者</a>、<a href="doc.html?2">语言学家</a>、<a href="doc.html?3">音乐家</a>，更多资料见<a href="###" target="_blank" class="doc-link-external">某个<svg class="doc-icon doc-icon-space-left">
+								<use xlink:href="../assets/icons.svg#external"></use>
+							</svg></a>网站。</p>
+					<h6>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</h6>
+
+					<h2 id="列表和图表">
+						<a href="#列表和图表" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">二、</span>
+						列表和图表
+					</h2>
+					<h3 id="列表">
+						<a href="#列表" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">1. </span>
+						列表
+					</h3>
+					<p>请看列表：</p>
+					<ul>
+						<li>列表1</li>
+						<li>列表2</li>
+						<li>
+							列表3
+							<ul>
+								<li>
+									列表1
+									<ul>
+										<li>列表1</li>
+										<li>列表2</li>
+										<li>列表3</li>
+									</ul>
+								</li>
+								<li>
+									列表2
+									<ol>
+										<li>列表1</li>
+										<li>列表2</li>
+										<li>列表3</li>
+									</ol>
+								</li>
+								<li>列表3</li>
+							</ul>
+						</li>
+					</ul>
+					<ol>
+						<li>
+							列表1
+							<ul>
+								<li>列表1</li>
+								<li>列表2</li>
+								<li>列表3</li>
+							</ul>
+						</li>
+						<li>
+							列表2
+						</li>
+						<li>
+							列表3
+							<ol>
+								<li>列表1</li>
+								<li>列表2</li>
+								<li>列表3</li>
+							</ol>
+						</li>
+					</ol>
+					<dl>
+						<dt>词1</dt>
+						<dd>说明1</dd>
+						<dd>说明2</dd>
+						<dt>词1</dt>
+						<dd>说明</dd>
+					</dl>
+					<h3 id="表格">
+						<a href="#表格" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">2. </span>
+						表格
+					</h3>
+					<figure>
+						<table>
+							<tr>
+								<th>列1</th>
+								<th>列2</th>
+								<th>列3</th>
+								<th>列1</th>
+								<th>列2</th>
+								<th>列3</th>
+							</tr>
+							<tr>
+								<td>行1-1</td>
+								<td>行1-2</td>
+								<td>行1-3</td>
+								<td>行1-1</td>
+								<td>行1-2</td>
+								<td>行1-3</td>
+							</tr>
+							<tr>
+								<td>行2-1</td>
+								<td>行2-2</td>
+								<td>行2-3</td>
+								<td>行2-1</td>
+								<td>行2-2</td>
+								<td>行2-3</td>
+							</tr>
+						</table>
+					</figure>
+					<h3 id="图片">
+						<a href="#图片" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">3. </span>
+						图片
+					</h3>
+					<figure>
+						<img width="300" height="250" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 200'%3E%3Crect fill='%23e1e4e8' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='30' text-anchor='middle' alignment-baseline='middle' font-family='sans-serif' fill='%23555'%3E250×200%3C/text%3E%3C/svg%3E" class="doc-image-zoom" onclick="DOC.viewImage(this)" />
+						<figcaption>图 1-1</figcaption>
+					</figure>
+					<figure>
+						<img width="300" height="250" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 200'%3E%3Crect fill='%23e1e4e8' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='30' text-anchor='middle' alignment-baseline='middle' font-family='sans-serif' fill='%23555'%3E250×200%3C/text%3E%3C/svg%3E" class="doc-image-zoom" onclick="DOC.viewImage(this)" />
+						<img width="300" height="250" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 250 200'%3E%3Crect fill='%23e1e4e8' width='300' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='30' text-anchor='middle' alignment-baseline='middle' font-family='sans-serif' fill='%23555'%3E250×200%3C/text%3E%3C/svg%3E" class="doc-image-zoom" onclick="DOC.viewImage(this)" />
+						<figcaption>图 1-1</figcaption>
+					</figure>
+					<h3 id="水平线">
+						<a href="#水平线" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">4. </span>
+						水平线
+					</h3>
+					<hr>
+					<hr class="doc-line-dotted">
+					<h2 id="表单元素">
+						<a href="#表单元素" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">三、</span>
+						表单元素
+					</h2>
+					请输入：
+					<input type="checkbox" value="文本框">
+					<input type="radio" value="文本框">
+					<input type="text" value="文本框">
+					<select>
+						<option>选项1</option>
+						<option>选项2</option>
+					</select>
+					<input type="file">
+					<input type="submit" value="提交">
+					<input type="reset" value="重置">
+					<button>按钮</button>
+					<textarea placeholder="请输入内容"></textarea>
+
+					<h2 id="引用">
+						<a href="#引用" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">四、</span>
+						引用
+					</h2>
+					<blockquote>文字</blockquote>
+					<blockquote class="doc-blockquote doc-success">文字</blockquote>
+					<blockquote class="doc-blockquote doc-info">
+						<svg class="doc-icon doc-blockquote-icon">
+							<use xlink:href="../assets/icons.svg#info"></use>
+						</svg>
+						文字
+					</blockquote>
+					<blockquote class="doc-blockquote doc-warning">
+						<svg class="doc-icon doc-blockquote-icon">
+							<use xlink:href="../assets/icons.svg#warning"></use>
+						</svg>
+						文字
+					</blockquote>
+					<blockquote class="doc-blockquote doc-error">
+						<svg class="doc-icon doc-blockquote-icon">
+							<use xlink:href="../assets/icons.svg#alert"></use>
+						</svg>
+						文字
+					</blockquote>
+					<blockquote class="doc-blockquote doc-success">
+						<div class="doc-blockquote-title">
+							<svg class="doc-icon doc-blockquote-icon">
+								<use xlink:href="../assets/icons.svg#success"></use>
+							</svg>
+							成功
+						</div>
+						<p>文字</p>
+					</blockquote>
+					<blockquote class="doc-blockquote doc-info">
+						<div class="doc-blockquote-title">
+							<svg class="doc-icon doc-blockquote-icon">
+								<use xlink:href="../assets/icons.svg#question"></use>
+							</svg>
+							信息
+						</div>
+						<p>文字</p>
+					</blockquote>
+					<blockquote class="doc-blockquote doc-warning">
+						<div class="doc-blockquote-title">
+							<svg class="doc-icon doc-blockquote-icon">
+								<use xlink:href="../assets/icons.svg#warning"></use>
+							</svg>
+							警告
+						</div>
+						<p>文字</p>
+					</blockquote>
+					<blockquote class="doc-blockquote doc-error">
+						<div class="doc-blockquote-title">
+							<svg class="doc-icon doc-blockquote-icon">
+								<use xlink:href="../assets/icons.svg#error"></use>
+							</svg>
+							错误
+						</div>
+						<p>文字</p>
+					</blockquote>
+
+					<h2 id="代码和演示">
+						<a href="#代码和演示" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">五、</span>
+						代码和演示
+					</h2>
+					<p>请看以下 <code>Code</code> 和 <code><a href="###">Code</a></code> :</p>
+					<pre class="doc-code doc-code-scrollable doc-language-js">
+						<span class="doc-toolbar doc-code-tools">
+							<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-codesandbox">
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#codesandbox"></use>
+								</svg>
+								<span class="doc-tooltip doc-arrow">在 CodeSandbox 编辑</span>
+							</button>
+							<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-codepen">
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#codepen"></use>
+								</svg>
+								<span class="doc-tooltip doc-arrow">在 CodePen 编辑</span>
+							</button>
+							<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-run">
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#run"></use>
+								</svg>
+								<span class="doc-tooltip doc-arrow">运行</span>
+							</button>
+							<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-loading">
+								<span class="doc-spinner"></span>
+								<span class="doc-tooltip doc-arrow">正在编译</span>
+							</button>
+							<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-copy" onclick="DOC.handleCopy(this, '已复制', '复制失败')">
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#copy"></use>
+								</svg>
+								<span class="doc-tooltip doc-arrow">复制源码</span>
+							</button>
+						</span>
+						<code class="doc-language-ejs">
+							<span class="doc-token-doctype">&lt;!DOCTYPE html&gt;</span><br><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>html</span> <span class="doc-token-attr-name">lang</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>zh-cn<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span><br><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>head</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>meta</span> <span class="doc-token-attr-name">charset</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>UTF-8<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>meta</span> <span class="doc-token-attr-name">name</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>viewport<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">content</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>width=device-width,initial-scale=1<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>title</span><span class="doc-token-punctuation">&gt;</span></span>文档页<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>title</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>link</span> <span class="doc-token-attr-name">rel</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>stylesheet<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>../assets/doc/doc.css<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>script</span> <span class="doc-token-attr-name">src</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>../assets/require/require.js<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span><span class="doc-token-script"></span><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>script</span><span class="doc-token-punctuation">&gt;</span></span><br>    <span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>style</span><span class="doc-token-punctuation">&gt;</span></span><span class="doc-token-style"><span class="doc-language-css"><br>		<span class="doc-token-atrule"><span class="doc-token-rule">@import</span> <span class="doc-token-string">"configs"</span><span class="doc-token-punctuation">;</span></span><br><br>		<span class="doc-token-selector">body</span> <span class="doc-token-punctuation">{</span><br>			<span class="doc-token-property">margin</span><span class="doc-token-punctuation">: </span> 0<span class="doc-token-punctuation">;</span><br>			<span class="doc-token-property">-webkit-text-size-adjust</span><span class="doc-token-punctuation">: </span> 100%<span class="doc-token-punctuation">;</span><br>			<span class="doc-token-property">-webkit-tap-highlight-color</span><span class="doc-token-punctuation">: </span> transparent<span class="doc-token-punctuation">;</span><br>		<span class="doc-token-punctuation">}</span><br><br>		<span class="doc-token-selector">.doc</span> <span class="doc-token-punctuation">{</span><br>			<span class="doc-token-property">color</span><span class="doc-token-punctuation">: </span> $doc-text-color<span class="doc-token-punctuation">;</span><br>			<span class="doc-token-property">font-family</span><span class="doc-token-punctuation">: </span> $doc-font-family<span class="doc-token-punctuation">;</span><br>			<span class="doc-token-property">font-weight</span><span class="doc-token-punctuation">: </span> $doc-font-weight<span class="doc-token-punctuation">;</span><br>			<span class="doc-token-property">line-height</span><span class="doc-token-punctuation">: </span> $doc-line-height<span class="doc-token-selector">;<br><br>			h1, h2, h3, h4, h5, h6</span> <span class="doc-token-punctuation">{</span><br>				<span class="doc-token-property">color</span><span class="doc-token-punctuation">: </span> $doc-text-color-dark<span class="doc-token-punctuation">;</span><br>				<span class="doc-token-property">font-weight</span><span class="doc-token-punctuation">: </span> $doc-font-weight-large<span class="doc-token-selector">;<br><br>				&gt; small, &gt; span &gt; small</span> <span class="doc-token-punctuation">{</span><br>					<span class="doc-token-property">margin-left</span><span class="doc-token-punctuation">: </span> $doc-margin-x-small<span class="doc-token-punctuation">;</span><br>					<span class="doc-token-property">color</span><span class="doc-token-punctuation">: </span> $doc-text-color-lighter<span class="doc-token-punctuation">;</span><br>					<span class="doc-token-property">font-weight</span><span class="doc-token-punctuation">: </span> $doc-font-weight<span class="doc-token-punctuation">;</span><br>				<span class="doc-token-punctuation">}</span><br>			<span class="doc-token-punctuation">}</span><br>		<span class="doc-token-punctuation">}</span><br><br>		<span class="doc-token-selector">.doc-hide-screen-small</span> <span class="doc-token-punctuation">{</span><br>			<span class="doc-token-atrule"><span class="doc-token-rule">@media</span> <span class="doc-token-punctuation">(</span><span class="doc-token-property">max-width</span><span class="doc-token-punctuation">: </span> $doc-screen-small<span class="doc-token-punctuation">)</span></span> <span class="doc-token-punctuation">{</span><br>				<span class="doc-token-property">display</span><span class="doc-token-punctuation">: </span> none <span class="doc-token-important">!important</span><span class="doc-token-punctuation">;</span><br>			<span class="doc-token-punctuation">}</span><br>		<span class="doc-token-punctuation">}</span><br><br>		<span class="doc-token-selector">.doc-hide-print</span> <span class="doc-token-punctuation">{</span><br>			<span class="doc-token-atrule"><span class="doc-token-rule">@media</span> print</span> <span class="doc-token-punctuation">{</span><br>				<span class="doc-token-property">display</span><span class="doc-token-punctuation">: </span> none <span class="doc-token-important">!important</span><span class="doc-token-punctuation">;</span><br>			<span class="doc-token-punctuation">}</span><br>		<span class="doc-token-punctuation">}</span><br>    </span></span><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>style</span><span class="doc-token-punctuation">&gt;</span></span><br><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>head</span><span class="doc-token-punctuation">&gt;</span></span><br><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>body</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h2</span> <span class="doc-token-attr-name">id</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>季姬击鸡记<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>季姬击鸡记<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h2</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h3</span> <span class="doc-token-attr-name">id</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>原文<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>原文<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h3</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>p</span><span class="doc-token-punctuation">&gt;</span></span>季姬寂，集鸡，鸡即棘鸡。棘鸡饥叽，季姬及箕稷济鸡。鸡既济，跻姬笈，季姬忌，急咭鸡，鸡急，继圾几，季姬急，即籍箕击鸡，箕疾击几伎，伎即齑，鸡叽集几基，季姬急极屐击鸡，鸡既殛，季姬激，即记《季姬击鸡记》。<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>p</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h3</span> <span class="doc-token-attr-name">id</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>译文<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>译文<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h3</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h4</span><span class="doc-token-punctuation">&gt;</span></span>译文版本一<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h4</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>p</span><span class="doc-token-punctuation">&gt;</span></span>季姬感到寂寞，罗集了一些鸡来养，是那种出自荆棘丛中的野鸡。野鸡饿了唧唧叫，季姬就拿竹箕中的小米喂它们。鸡吃饱了，跳到季姬的书箱上，季姬怕脏，忙赶鸡，鸡吓急了，就接着跳到桌子上，季姬更着急了，就借竹箕为赶鸡的工具，投击野鸡，竹箕的投速很快，却打中了几桌上的陶伎俑，那陶伎俑掉到地下，竟粉碎了。季姬睁眼一瞧，鸡躲在几桌下乱叫，季姬一怒之下，脱下木屐鞋来打鸡，把鸡打死了。想着养鸡的经过，季姬激动起来，就写了这篇《季姬击鸡记》。<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>p</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h4</span><span class="doc-token-punctuation">&gt;</span></span>译文版本二<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h4</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>p</span><span class="doc-token-punctuation">&gt;</span></span>四姑娘(伯仲叔季，季为行四)为了排遣寂寞，于是豢养了一些鸡，那些鸡就是林地里的那种林鸡。林鸡饿了便唧唧叫起来，四姑娘于是用簸箕盛粟米给鸡喂食。鸡吃饱了，便跳到了四姑娘的衣箱上，四姑娘一看这不行啊，就急忙叫喊着轰鸡，鸡惊，继而又蹦到了案几上，四姑娘匆忙中，将手中的簸箕照着鸡就扔了过去，簸箕飞过砸中几个陶俑，陶俑摔得粉碎，鸡在案几底下不住惊叫，四姑娘情急之下抄起木鞋打鸡，鸡虽然被打死了，可四姑娘仍是心绪难平，于是便写下了《四姑娘打鸡的故事》。<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>p</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h5</span><span class="doc-token-punctuation">&gt;</span></span>赵元任<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>small</span><span class="doc-token-punctuation">&gt;</span></span>(作者)<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>small</span><span class="doc-token-punctuation">&gt;</span></span><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h5</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>p</span><span class="doc-token-punctuation">&gt;</span></span>现代著名<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>学者<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span>、<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>语言学家<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span>、<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>音乐家<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span> ，更多资料见 <span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>http://tealui.com<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">target</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>_blank<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">class</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>doc-link-external<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>某个<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span> 网站。<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>p</span><span class="doc-token-punctuation">&gt;</span></span><br>	<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>h5</span><span class="doc-token-punctuation">&gt;</span></span>本文版权归作者所有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>h5</span><span class="doc-token-punctuation">&gt;</span></span><br>    <span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>script</span><span class="doc-token-punctuation">&gt;</span></span><span class="doc-token-script"><span class="doc-language-javascript"><br>		<span class="doc-token-keyword">import</span> <span class="doc-token-punctuation">{</span> getExt <span class="doc-token-punctuation">}</span> <span class="doc-token-keyword">from</span> <span class="doc-token-string">"tutils/path"</span><br>		<span class="doc-token-keyword">import</span> <span class="doc-token-punctuation">{</span> Builder<span class="doc-token-punctuation">,</span> CompileResult <span class="doc-token-punctuation">}</span> <span class="doc-token-keyword">from</span> <span class="doc-token-string">"./builder"</span><br>		<span class="doc-token-keyword">import</span> <span class="doc-token-punctuation">{</span> compileIconFont <span class="doc-token-punctuation">}</span> <span class="doc-token-keyword">from</span> <span class="doc-token-string">"iconfont-compiler"</span><br><br>		<span class="doc-token-keyword">export</span> <span class="doc-token-keyword">async</span> <span class="doc-token-keyword">function</span> <span class="doc-token-function">compile</span><span class="doc-token-punctuation">(</span><span class="doc-token-parameter">content<span class="doc-token-operator">:</span> string<span class="doc-token-punctuation">,</span> path<span class="doc-token-operator">:</span> string<span class="doc-token-punctuation">,</span> outPath<span class="doc-token-operator">:</span> string<span class="doc-token-punctuation">,</span> builder<span class="doc-token-operator">:</span> Builder</span><span class="doc-token-punctuation">)</span> <span class="doc-token-punctuation">{</span><br>			<span class="doc-token-keyword">try</span> <span class="doc-token-punctuation">{</span><br>				<span class="doc-token-keyword">const</span> format <span class="doc-token-operator">=</span> <span class="doc-token-function">getExt</span><span class="doc-token-punctuation">(</span>outPath<span class="doc-token-punctuation">)</span><span class="doc-token-punctuation">.</span><span class="doc-token-function">slice</span><span class="doc-token-punctuation">(</span><span class="doc-token-number">1</span><span class="doc-token-punctuation">)</span> <span class="doc-token-keyword">as</span> any<br>				<span class="doc-token-keyword">const</span> result <span class="doc-token-operator">=</span> <span class="doc-token-keyword">await</span> <span class="doc-token-function">compileIconFont</span><span class="doc-token-punctuation">(</span>content<span class="doc-token-punctuation">,</span> path<span class="doc-token-punctuation">,</span> <span class="doc-token-punctuation">[</span>format<span class="doc-token-punctuation">]</span><span class="doc-token-punctuation">,</span> builder<span class="doc-token-punctuation">.</span>options<span class="doc-token-punctuation">.</span>iconFont<span class="doc-token-punctuation">,</span> builder<span class="doc-token-punctuation">.</span>fs<span class="doc-token-punctuation">)</span> <span class="doc-token-keyword">as</span> CompileResult<br><span class="doc-token-deleted">				result<span class="doc-token-punctuation">.</span>content <span class="doc-token-operator">=</span> result<span class="doc-token-punctuation">[</span>format<span class="doc-token-punctuation">]</span></span><br>				<span class="doc-token-keyword">return</span> result<br>			<span class="doc-token-punctuation">}</span> <span class="doc-token-keyword">catch</span> <span class="doc-token-punctuation">(</span>e<span class="doc-token-punctuation">)</span> <span class="doc-token-punctuation">{</span><br><span class="doc-token-inserted">				<span class="doc-token-keyword">return</span> <span class="doc-token-punctuation">{</span></span><br><span class="doc-token-highlight">					errors<span class="doc-token-operator">:</span> <span class="doc-token-punctuation">[</span>e<span class="doc-token-punctuation">]</span></span><br>				<span class="doc-token-punctuation">}</span><br>			<span class="doc-token-punctuation">}</span><br>		<span class="doc-token-punctuation">}<br>    </span></span><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>script</span><span class="doc-token-punctuation">&gt;</span></span></span><br><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>body</span><span class="doc-token-punctuation">&gt;</span></span><br><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>html</span><span class="doc-token-punctuation">&gt;</span></span>
+						</code>
+					</pre>
+				</div>
+				<div class="doc-demo">
+					<div class="doc-run-result">
+						<a href="###">链接</a>
+						<input type="text" />
+					</div>
+					<details class="doc-section doc doc-demo-code" open>
+						<summary>
+							<span class="doc-toolbar doc-code-tools">
+								<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-edit">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#run"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">运行</span>
+								</button>
+								<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-copy" onclick="DOC.handleCopy(this, '已复制', '复制失败')">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#copy"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">复制源码</span>
+								</button>
+							</span>
+							查看源码
+						</summary>
+						<pre class="doc-code">
+							<code class="doc-language-ejs" contenteditable="true" autocorrect="off" autocapitalize="off" spellcheck="false" id="code">
+								<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>input</span> <span class="doc-token-attr-name">type</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>text<span class="doc-token-punctuation">"</span></span> <span class="doc-token-punctuation">/&gt;</span></span>
+							</code>
+						</pre>
+					</details>
+				</div>
+				<div class="doc-demo doc-demo-test">
+					<iframe class="doc-run-result"></iframe>
+					<details class="doc doc-demo-code">
+						<summary>
+							<span class="doc-toolbar doc-code-tools">
+								<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-copy" onclick="DOC.handleCopy(this, '已复制', '复制失败')">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#copy"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">复制源码</span>
+								</button>
+							</span>
+							查看源码
+						</summary>
+						<pre class="doc-code language-js">
+							<code class="doc-language-ejs" contenteditable="true">
+								<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>input</span> <span class="doc-token-attr-name">type</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>text<span class="doc-token-punctuation">"</span></span> <span class="doc-token-punctuation">/&gt;</span></span>
+							</code>
+						</pre>
+					</details>
+				</div>
+				<div class="doc-section doc">
+					<section class="doc-api-section">
+						<h2 id="API">
+							<a href="#API" class="doc-permalink" title="本节链接" aria-hidden="true">
+								<svg class="doc-icon">
+									<use xlink:href="../assets/icons.svg#anchor"></use>
+								</svg>
+							</a>
+							<span class="doc-toolbar">
+								<button class="doc-toolbar-button doc-api-search">
+									<input type="search" placeholder="筛选 API..." required class="doc-api-search-input" oninput="DOC.handleMemberFilter(this)">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#search"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">
+										筛选 API
+									</span>
+								</button>
+								<button class="doc-toolbar-button doc-api-button-private doc-selected">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#private"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">
+										显示保护和内部成员
+									</span>
+								</button>
+								<button class="doc-toolbar-button doc-api-button-inherit">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#inherit"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">
+										显示继承的成员
+									</span>
+								</button>
+								<button class="doc-toolbar-button doc-api-button-collapse" onclick="DOC.toggleMembersCollapse(this)">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#sidebar"></use>
+									</svg>
+									<span class="doc-tooltip doc-arrow">
+										全部展开或折叠
+									</span>
+								</button>
+							</span>
+							<span class="doc-counter">六、</span>
+							API
+						</h2>
+						<section class="doc-api" onclick="DOC.handleMemberClick(event)">
+							<div class="doc-api-header">
+								<h4 class="doc-api-title" id="Button">
+									<a href="#Button" aria-hidden="true" class="doc-permalink" title="本节链接">
+										<svg class="doc-icon">
+											<use xlink:href="../assets/icons.svg#anchor"></use>
+										</svg>
+									</a>
+									<span class="doc-toolbar" aria-hidden="true">
+										<a href="###" class="doc-toolbar-button">
+											<svg class="doc-icon">
+												<use xlink:href="../assets/icons.svg#code"></use>
+											</svg>
+											<span class="doc-tooltip doc-arrow">
+												查看源码<br />
+												<small>(共 14 行)</small>
+											</span>
+										</a>
+									</span>
+									<svg class="doc-icon doc-icon-space-right">
+										<use xlink:href="../assets/icons.svg#class"></use>
+									</svg>
+									<code class="doc-api-name">Button</code>
+								</h4>
+								<div class="doc-api-summary">
+									<p>表示一个按按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮钮。</p>
+									<p>表示一个按按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮按钮钮。</p>
+								</div>
+							</div>
+							<div class="doc-api-body">
+								<div class="doc-api-type">
+									<strong>继承：</strong>
+									<code class="doc-token-class-name"><a href="#Button">Button</a> | <span class="doc-more" onclick="DOC.showMoreDetails(this)">...<span class="doc-more-details">number</span></code>
+								</div>
+								<div class="doc-api-type">
+									<strong>实现：</strong>
+									<code><a href="###"><span class="doc-token-class-name">Component</span></a></code>
+								</div>
+
+								<h4>属性</h4>
+								<figure>
+									<table class="doc-api-table doc-api-props">
+										<tr>
+											<th class="doc-api-table-name">属性名</th>
+											<th class="doc-api-table-summary">说明</th>
+											<th class="doc-api-table-type">类型</th>
+										</tr>
+										<tr id="Button.class" class="doc-api-property">
+											<td class="doc-api-table-name">
+												<svg class="doc-icon doc-icon-space-right">
+													<use xlink:href="../assets/icons.svg#property"></use>
+												</svg>
+												<code class="doc-api-name">class<span class="doc-tag doc-warning">内部</span></code>
+											</td>
+											<td class="doc-api-table-summary">
+												<p>CSS 类名</p>
+											</td>
+											<td class="doc-api-table-type"><code>string</code></td>
+										</tr>
+										<tr id="Button.onClick" class="doc-api-property doc-api-private">
+											<td class="doc-api-table-name">
+												<svg class="doc-icon doc-icon-space-right">
+													<use xlink:href="../assets/icons.svg#event"></use>
+												</svg>
+												<code class="doc-api-name">onClick</code>
+											</td>
+											<td class="doc-api-table-summary">
+												<p>点击事件</p>
+											</td>
+											<td class="doc-api-table-type"><code>(event: Event) => string</code></td>
+										</tr>
+									</table>
+								</figure>
+
+								<details class="doc-api-inherited">
+									<summary>继承自 <code>B</code> 的属性</summary>
+									<figure>
+										<table class="doc-api-table doc-api-props">
+											<tr class="doc-api-property">
+												<th class="doc-api-table-name">属性名</th>
+												<th class="doc-api-table-summary">说明</th>
+												<th class="doc-api-table-type">类型</th>
+											</tr>
+											<tr id="Button.class" class="doc-api-property">
+												<td class="doc-api-table-name">
+													<svg class="doc-icon doc-icon-space-right">
+														<use xlink:href="../assets/icons.svg#property"></use>
+													</svg>
+													<code class="doc-api-name">class</code>
+												</td>
+												<td class="doc-api-table-summary">
+													<p>CSS 类名</p>
+												</td>
+												<td class="doc-api-table-type"><code>string</code></td>
+											</tr>
+											<tr id="Button.onClick" class="doc-api-property">
+												<td class="doc-api-table-name">
+													<svg class="doc-icon doc-icon-space-right">
+														<use xlink:href="../assets/icons.svg#event"></use>
+													</svg>
+													<code class="doc-api-name">onClick</code>
+												</td>
+												<td class="doc-api-table-summary">
+													<p>CSS 类名</p>
+												</td>
+												<td class="doc-api-table-type"><code>(event: Event) => string</code></td>
+											</tr>
+										</table>
+									</figure>
+								</details>
+
+								<h4>方法</h4>
+								<section class="doc-api">
+									<div class="doc-api-header">
+										<h4 class="doc-api-title" id="Button.setMenu">
+											<span class="doc-toolbar">
+												<code title="所属类"><a href="#Button">Button</a></code>
+												<a href="###" class="doc-toolbar-button">
+													<svg class="doc-icon">
+														<use xlink:href="../assets/icons.svg#code"></use>
+													</svg>
+													<span class="doc-tooltip doc-arrow">
+														查看源码<br />
+														<small>(共 14 行)</small>
+													</span>
+												</a>
+											</span>
+											<a href="#Button.setMenu" aria-hidden="true" class="doc-permalink" title="本节链接">
+												<svg class="doc-icon">
+													<use xlink:href="../assets/icons.svg#anchor"></use>
+												</svg>
+											</a>
+											<svg class="doc-icon doc-icon-space-right">
+												<use xlink:href="../assets/icons.svg#method"></use>
+											</svg>
+											<code class="doc-api-name">setMenu</code>
+										</h4>
+										<div class="doc-api-summary">
+											<p>设置点击按钮后的弹出菜单</p>
+										</div>
+									</div>
+									<div class="doc-api-body">
+										<h5>参数</h5>
+										<figure>
+											<table class="doc-api-table">
+												<tr>
+													<th class="doc-api-table-name">参数名</th>
+													<th class="doc-api-table-summary">说明</th>
+													<th class="doc-api-table-type">类型</th>
+												</tr>
+												<tr>
+													<td class="doc-api-table-name"><code>menu</code></td>
+													<td class="doc-api-table-type">
+														<code class="doc-token-class-name"><a href="#Control">Menu</a></code>
+													</td>
+													<td class="doc-api-table-summary">
+														<p>要设置的弹出菜单</p>
+													</td>
+												</tr>
+												<tr>
+													<td class="doc-api-table-name">
+														<small class="doc-api-optional">(可选)</small>
+														<code>callback</code>
+													</td>
+													<td class="doc-api-table-summary">
+														<p>弹出菜单后的回调函数</p>
+													</td>
+													<td class="doc-api-table-type">
+														<code class="doc-token-class-name"><a href="#Control">(event: string, sender, this) => void</a></code>
+													</td>
+												</tr>
+												<tr>
+													<td class="doc-api-table-name">
+														<code>...</code>
+														<code>args</code>
+													</td>
+													<td class="doc-api-table-summary">
+														<p>其他附加参数</p>
+														<ul>
+															<li>
+																<code>destination</code>:
+																<code class="doc-token-builtin">string</code>
+																<p>查找</p>
+																<ul>
+																	<li>
+																		<code>destination</code>:
+																		<code class="doc-token-builtin">string</code>
+																		<p>查找</p>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+													<td class="doc-api-table-type">
+														<code>any</code>
+													</td>
+												</tr>
+											</table>
+										</figure>
+										<h5>返回值</h5>
+										<div class="doc-api-type"><strong>类型：</strong><code><a href="#Control">Control</a></code></div>
+										<p>查找</p>
+										<h5>示例</h5>
+										<details class="doc-api-example" open>
+											<summary>示例1：这是一个a示例</summary>
+											<pre class="doc-code">
+											<span class="doc-toolbar">
+												<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-copy" onclick="DOC.handleCopy(this, '已复制', '复制失败')">
+													<svg class="doc-icon">
+														<use xlink:href="../assets/icons.svg#copy"></use>
+													</svg>
+													<span class="doc-tooltip doc-arrow">复制源码</span>
+												</button>
+											</span>
+											<code class=" language-markup">
+												<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">class</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>x-button<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>a 按钮<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">class</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>x-button<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>a 按钮<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span>
+											</code>
+										</pre>
+										</details>
+										<details class="doc-api-example">
+											<summary>示例2：这是一个a示例</summary>
+											<pre class="doc-code">
+											<span class="doc-toolbar doc-code-tools">
+												<button type="button" aria-hidden="true" class="doc-toolbar-button doc-code-tool-copy" onclick="DOC.handleCopy(this, '已复制', '复制失败')">
+													<svg class="doc-icon">
+														<use xlink:href="../assets/icons.svg#copy"></use>
+													</svg>
+													<span class="doc-tooltip doc-arrow">复制源码</span>
+												</button>
+											</span>
+											<code class=" language-markup">
+												<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">class</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>x-button<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>a 按钮<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span><span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;</span>a</span> <span class="doc-token-attr-name">href</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>###<span class="doc-token-punctuation">"</span></span> <span class="doc-token-attr-name">class</span><span class="doc-token-attr-value"><span class="doc-token-punctuation">=</span><span class="doc-token-punctuation">"</span>x-button<span class="doc-token-punctuation">"</span></span><span class="doc-token-punctuation">&gt;</span></span>a 按钮<span class="doc-token-tag"><span class="doc-token-tag"><span class="doc-token-punctuation">&lt;/</span>a</span><span class="doc-token-punctuation">&gt;</span></span>
+											</code>
+										</pre>
+										</details>
+									</div>
+								</section>
+								<section class="doc-api doc-collapsed">
+									<div class="doc-api-header">
+										<h4 class="doc-api-title" id="Button.setMenu2">
+											<span class="doc-toolbar">
+												<code title="所属类"><a href="#Button">Button</a></code>
+												<a href="###" class="doc-toolbar-button">
+													<svg class="doc-icon">
+														<use xlink:href="../assets/icons.svg#code"></use>
+													</svg>
+													<span class="doc-tooltip doc-arrow">
+														查看源码<br />
+														<small>(共 14 行)</small>
+													</span>
+												</a>
+											</span>
+											<a href="#Button.setMenu2" aria-hidden="true" class="doc-permalink" title="本节链接">
+												<svg class="doc-icon">
+													<use xlink:href="../assets/icons.svg#anchor"></use>
+												</svg>
+											</a>
+											<svg class="doc-icon doc-icon-space-right">
+												<use xlink:href="../assets/icons.svg#method"></use>
+											</svg>
+											<code class="doc-api-name">setMenu</code>
+										</h4>
+										<div class="doc-api-summary">
+											<p>设置点击按钮后的弹出菜单</p>
+										</div>
+									</div>
+									<div class="doc-api-body">
+										<h5>参数</h5>
+										<figure>
+											<table class="doc-api-table">
+												<tr>
+													<th class="doc-api-table-name">参数名</th>
+													<th class="doc-api-table-summary">说明</th>
+													<th class="doc-api-table-type">类型</th>
+												</tr>
+												<tr>
+													<td class="doc-api-table-name">
+														<code class="doc-api-name">menu</code>
+													</td>
+													<td class="doc-api-table-summary">
+														<p>要设置的弹出菜单</p>
+													</td>
+													<td class="doc-api-table-type">
+														<code class="doc-token-class-name"><a href="#Control">Menu</a></code>
+													</td>
+												</tr>
+												<tr>
+													<td class="doc-api-table-name">
+														<small class="doc-api-optional">(可选)</small>
+														<code class="doc-api-name">callback</code>
+													</td>
+													<td class="doc-api-table-summary">
+														<p>弹出菜单后的回调函数</p>
+													</td>
+													<td class="doc-api-table-type">
+														<span class="doc-api-parameter-type doc-type doc-popup-trigger">
+															<code class="doc-token-class-name"><a href="#Control">(event: string, sender, this) => void</a></code>
+															<pre class="doc-popup doc-arrow doc-type-source">
+																<code>
+																	source source source source source
+																</code>
+															</pre>
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<td class="doc-api-table-name">
+														<code>...</code>
+														<code>args</code>
+													</td>
+													<td class="doc-api-table-summary">
+														<p>其他附加参数</p>
+														<ul>
+															<li>
+																<code>destination</code>:
+																<code class="doc-token-builtin">string</code>
+																<p>查找</p>
+																<ul>
+																	<li>
+																		<code>destination</code>:
+																		<code class="doc-token-builtin">string</code>
+																		<p>查找</p>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</td>
+													<td class="doc-api-table-type">
+														<code>any</code>
+													</td>
+												</tr>
+											</table>
+										</figure>
+										<h5>返回值</h5>
+										<div class="doc-api-type"><strong>类型：</strong><code><a href="#Control">Control</a></code></div>
+										<p>查找</p>
+									</div>
+								</section>
+							</div>
+						</section>
+					</section>
+					<h2 id="列表和卡片">
+						<a href="#列表和卡片" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">七、</span>
+						列表和卡片
+						<span class="doc-tag">10</span>
+					</h2>
+					<h3 id="列表2">
+						<a href="#列表2" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">1. </span>
+						列表
+						<span class="doc-tag">10</span>
+					</h3>
+					<div class="doc-waterfall">
+						<section class="doc-waterfall-item" style="grid-row-end: span 9;">
+							<h4>分类 1<span class="doc-tag">6</span></h4>
+							<ul>
+								<li><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><a href="###" title="组件">Component</a><small>组件</small></li>
+							</ul>
+						</section>
+						<section class="doc-waterfall-item" style="grid-row-end: span 7;">
+							<h4><input type="checkbox">分类 2<span class="doc-tag">4</span></h4>
+							<ul>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+							</ul>
+						</section>
+						<section class="doc-waterfall-item" style="grid-row-end: span 12;">
+							<h4><input type="checkbox">分类 3<span class="doc-tag">9</span></h4>
+							<ul>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+							</ul>
+						</section>
+						<section class="doc-waterfall-item" style="grid-row-end: span 8;">
+							<h4><input type="checkbox">分类 4<span class="doc-tag">5</span></h4>
+							<ul>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+							</ul>
+						</section>
+						<section class="doc-waterfall-item" style="grid-row-end: span 8;">
+							<h4><input type="checkbox">分类 5<span class="doc-tag">5</span></h4>
+							<ul>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+							</ul>
+						</section>
+						<section class="doc-waterfall-item" style="grid-row-end: span 8;">
+							<h4><input type="checkbox">分类 6<span class="doc-tag">5</span></h4>
+							<ul>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+								<li><input type="checkbox"><a href="###" title="组件">Component</a><small>组件</small></li>
+							</ul>
+						</section>
+					</div>
+					<div class="doc-tip">
+						<span class="doc-spinner doc-icon-space-right"></span>
+						正在载入列表...
+					</div>
+					<h3 id="卡片">
+						<a href="#卡片" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">2. </span>
+						卡片
+					</h3>
+					<div class="doc-grid">
+						<a href="###" class="doc-card">
+							<div class="doc-card-header">
+								内容内容内容
+							</div>
+							<div class="doc-card-body">
+								内容
+							</div>
+						</a>
+						<a href="###" class="doc-card">
+							<div class="doc-card-header">
+								内容内容内容
+							</div>
+							<div class="doc-card-body">
+								内容
+							</div>
+						</a>
+						<a href="###" class="doc-card">
+							<div class="doc-card-body">
+								<h3>标题</h3>
+								<p>说明说明说明说明说明说明说明</p>
+							</div>
+							<div class="doc-card-footer">
+								内容内容内容
+								<svg class="doc-icon doc-icon-arrow-right">
+									<use xlink:href="../assets/icons.svg#arrow-right"></use>
+								</svg>
+							</div>
+						</a>
+						<a href="###" class="doc-card">
+							<div class="doc-card-body">
+								<h3>标题</h3>
+								<p>说明说明说明说明说明说明说明</p>
+							</div>
+							<div class="doc-card-footer">
+								内容内容内容
+								<svg class="doc-icon doc-icon-arrow-right">
+									<use xlink:href="../assets/icons.svg#arrow-right"></use>
+								</svg>
+							</div>
+						</a>
+					</div>
+
+					<h2 id="选项卡">
+						<a href="#选项卡" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">八、</span>
+						选项卡
+					</h2>
+					<div class="doc-tab">
+						<div class="doc-tab-header">
+							<ul onclick="DOC.toggleTab(event.target)" role="tablist">
+								<li tabindex="0" role="tab">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#windows"></use>
+									</svg>
+									Windows
+								</li>
+								<li tabindex="0" role="tab" class="doc-selected">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#ios"></use>
+									</svg>
+									Mac
+								</li>
+								<li tabindex="0" role="tab">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#linux"></use>
+									</svg>
+									Linux
+								</li>
+								<li tabindex="0" role="tab">
+									<svg class="doc-icon">
+										<use xlink:href="../assets/icons.svg#android"></use>
+									</svg>
+									Android
+								</li>
+							</ul>
+						</div>
+						<div class="doc-tab-body">
+							<div class="doc-tab-content" role="tabpanel">
+								1
+							</div>
+							<div class="doc-tab-content doc-selected" role="tabpanel">
+								2
+							</div>
+							<div class="doc-tab-content" role="tabpanel">
+								3
+							</div>
+						</div>
+					</div>
+
+					<h2 id="盒子">
+						<a href="#盒子" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">九、</span>
+						盒子
+					</h2>
+					<div class="doc-box doc-small">x</div>
+					<div class="doc-box">doc-box</div>
+					<div class="doc-box doc-large">doc-box<br>doc-large</div>
+					<div class="doc-box doc-error">doc-box</div>
+					<div class="doc-box doc-warning">doc-box</div>
+					<div class="doc-box doc-success">doc-box</div>
+					<div class="doc-box doc-info">doc-box</div>
+
+					<h2 id="很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长">
+						<a href="#很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长" aria-hidden="true" class="doc-permalink" title="本节链接">
+							<svg class="doc-icon">
+								<use xlink:href="../assets/icons.svg#anchor"></use>
+							</svg>
+						</a>
+						<span class="doc-counter">十、</span>
+						很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长
+					</h2>
+				</div>
+				<nav class="doc-section doc-pager">
+					<a href="###" title="上一页" class="doc-pager-prev">
+						<svg class="doc-icon doc-icon-arrow-left">
+							<use xlink:href="../assets/icons.svg#arrow-right"></use>
+						</svg>
+						上一页: 长长长长长长长长长长长长长长长长长长长长长长
+					</a>
+					<a href="###" title="下一页" class="doc-pager-next">
+						<svg class="doc-icon doc-icon-arrow-right">
+							<use xlink:href="../assets/icons.svg#arrow-right"></use>
+						</svg>
+						下一页: 长长长长长长长长长长长长长长长长长长长长长长
+					</a>
+				</nav>
+			</div>
+			<!--#DOC-ARTICLE-END-->
+		</article>
+		<div class="doc-section doc-back-to-top">
+			<a href="#" title="返回顶部" onclick="DOC.backToTop(); return false;">
+				<svg class="doc-icon">
+					<use xlink:href="../assets/icons.svg#top"></use>
+				</svg>
+			</a>
+		</div>
+	</main>
+	<footer class="doc-section doc-footer">
+		<div class="doc-links">
+			<a href="###">反馈建议</a> |
+			<a href="###">贡献指南</a> |
+			<a href="###">在线讨论</a>
+		</div>
+		<div class="doc-copyright">&copy; 2011-2021 The Teal Team.</div>
+	</footer>
+	<!-- <div class="doc-section doc-imageview doc-qrcode">
+		<div class="doc-imageview-container">
+			<div class="doc-imageview-content">
+				<span class="doc-spinner"></span>
+			</div>
+			<input type="url" class="doc-imageview-title" value="http://example.com/" spellcheck="false" />
+		</div>
+	</div> -->
+	<script>
+		// 删除页面中影响布局的空白
+		var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+		while (walker.nextNode()) {
+			walker.currentNode.textContent = walker.currentNode.textContent.replace(/^([ \t]*)(?:\n[ \t]*)+/, "$1").replace(/(?:\n[ \t]*)+$/, "")
+			if (walker.currentNode.parentNode.tagName === "PRE" && !walker.currentNode.textContent.trim()) {
+				walker.currentNode.textContent = walker.currentNode.textContent.trim()
+			}
+		}
+	</script>
+</body>
+</html>

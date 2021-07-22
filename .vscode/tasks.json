@@ -1,0 +1,66 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "构建",
+			"type": "shell",
+			"command": "npm run build --silent",
+			"problemMatcher": [],
+			"presentation": {
+				"showReuseMessage": false,
+				"clear": true
+			}
+		},
+		{
+			"group": "build",
+			"label": "监听",
+			"type": "shell",
+			"command": "npm run watch --silent",
+			"problemMatcher": [],
+			"presentation": {
+				"showReuseMessage": false,
+				"clear": true
+			}
+		},
+		{
+			"group": "test",
+			"label": "测试",
+			"type": "shell",
+			"command": "npm run test --silent",
+			"problemMatcher": [],
+			"presentation": {
+				"showReuseMessage": false,
+				"clear": true
+			}
+		},
+		{
+			"group": "test",
+			"label": "覆盖率测试",
+			"type": "shell",
+			"command": "npm run coverage --silent",
+			"problemMatcher": [],
+			"presentation": {
+				"showReuseMessage": false,
+				"clear": true
+			}
+		},
+		{
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"type": "shell",
+			"label": "覆盖率测试(当前文件)",
+			"command": "npm run coverage \"${relativeFile}\" --silent",
+			"problemMatcher": [],
+			"presentation": {
+				"showReuseMessage": false,
+				"clear": true
+			}
+		}
+	]
+}
