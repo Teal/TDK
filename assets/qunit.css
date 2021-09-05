@@ -1,19 +1,10 @@
 /*!
-<<<<<<< HEAD
- * QUnit 2.11.3
-=======
  * QUnit 2.16.0
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
  * https://qunitjs.com/
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
-<<<<<<< HEAD
- *
- * Date: 2020-10-05T01:34Z
-=======
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
  */
 
 /** Font Family and Sizes */
@@ -45,8 +36,6 @@
    }
    
    
-<<<<<<< HEAD
-=======
    /** Fixed headers with scrollable tests */
    
    @supports (display: flex) or (display: -webkit-box) {
@@ -74,17 +63,12 @@
    }
    
    
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    /** Header (excluding toolbar) */
    
    #qunit-header {
      padding: 0.5em 0 0.5em 1em;
    
-<<<<<<< HEAD
-     color: #8699A4;
-=======
      color: #C2CCD1;
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
      background-color: #0D3349;
    
      font-size: 1.5em;
@@ -96,11 +80,7 @@
    
    #qunit-header a {
      text-decoration: none;
-<<<<<<< HEAD
-     color: #C2CCD1;
-=======
      color: inherit;
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    }
    
    #qunit-header a:hover,
@@ -199,11 +179,7 @@
      border: 1px solid #D3D3D3;
      border-top: none;
      border-radius: 0 0 .25em .25em;
-<<<<<<< HEAD
-     color: #000;
-=======
      color: #0D3349;
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
      background-color: #F5F5F5;
      z-index: 99;
    }
@@ -215,13 +191,8 @@
    
    #qunit-modulefilter-dropdown .clickable.checked {
      font-weight: bold;
-<<<<<<< HEAD
-     color: #000;
-     background-color: #D2E0E6;
-=======
      color: #0D3349;
      background-color: #E2F0F7;
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    }
    
    #qunit-modulefilter-dropdown .clickable:hover {
@@ -325,26 +296,12 @@
    
    #qunit-tests li a {
      padding: 0.5em;
-<<<<<<< HEAD
-     color: #C2CCD1;
-     text-decoration: none;
-   }
-   
-   #qunit-tests li p a {
-     padding: 0.25em;
-     color: #6B6464;
-   }
-   #qunit-tests li a:hover,
-   #qunit-tests li a:focus {
-     color: #000;
-=======
      color: inherit;
      text-decoration: underline;
    }
    #qunit-tests li a:hover,
    #qunit-tests li a:focus {
      color: #0D3349;
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    }
    
    #qunit-tests li .runtime {
@@ -404,11 +361,7 @@
    
    /*** Test Counts */
    
-<<<<<<< HEAD
-   #qunit-tests b.counts                       { color: #000; }
-=======
    #qunit-tests b.counts                       { color: #0D3349; }
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    #qunit-tests b.passed                       { color: #5E740B; }
    #qunit-tests b.failed                       { color: #710909; }
    
@@ -421,8 +374,6 @@
    
    /*** Passing Styles */
    
-<<<<<<< HEAD
-=======
    
    #qunit-tests .pass {
      color: #2F68DA;
@@ -433,19 +384,12 @@
      color: #366097;
    }
    
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    #qunit-tests li li.pass {
      color: #3C510C;
      background-color: #FFF;
      border-left: 10px solid #C6E746;
    }
    
-<<<<<<< HEAD
-   #qunit-tests .pass                          { color: #528CE0; background-color: #D2E0E6; }
-   #qunit-tests .pass .test-name               { color: #366097; }
-   
-=======
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    #qunit-tests .pass .test-actual,
    #qunit-tests .pass .test-expected           { color: #999; }
    
@@ -453,14 +397,11 @@
    
    /*** Failing Styles */
    
-<<<<<<< HEAD
-=======
    #qunit-tests .fail {
      color: #000;
      background-color: #EE5757;
    }
    
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    #qunit-tests li li.fail {
      color: #710909;
      background-color: #FFF;
@@ -472,13 +413,6 @@
      border-radius: 0 0 5px 5px;
    }
    
-<<<<<<< HEAD
-   #qunit-tests .fail                          { color: #000; background-color: #EE5757; }
-   #qunit-tests .fail .test-name,
-   #qunit-tests .fail .module-name             { color: #000; }
-   
-=======
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    #qunit-tests .fail .test-actual             { color: #EE5757; }
    #qunit-tests .fail .test-expected           { color: #008000; }
    
@@ -511,13 +445,8 @@
    /** Result */
    
    #qunit-testresult {
-<<<<<<< HEAD
-     color: #2B81AF;
-     background-color: #D2E0E6;
-=======
      color: #366097;
      background-color: #E2F0F7;
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
    
      border-bottom: 1px solid #FFF;
    }
@@ -547,9 +476,4 @@
      left: -10000px;
      width: 1000px;
      height: 1000px;
-<<<<<<< HEAD
    }
-   
-=======
-   }
->>>>>>> 2ebf6be2f9623f82d155e9f65641591bb4360715
