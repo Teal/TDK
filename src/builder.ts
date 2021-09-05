@@ -32,7 +32,7 @@ export class Builder {
 	/** 获取所有编译器 */
 	readonly compilers: Compiler[] = [
 		{
-			inExts: [".js", ".tsx", ".ts", ".jsx"],
+			inExts: [".js", ".ts", ".tsx", ".jsx"],
 			outExt: ".js",
 			compile(content, path, outPath, builder) {
 				if (path === outPath) {
