@@ -435,7 +435,7 @@ export interface TypeScriptCompilerOptions {
 	configFile?: string | string[]
 	/** 编译器的选项，这里设置的选项会覆盖 `tsconfig.json` 中的同名配置 */
 	compilerOptions?: Merge<ts.CompilerOptions, {
-		target?: "es3" | "es5" | "es6" | "es2015" | "es2016" | "es2017" | "es2018" | "es2019" | "es2020" | "esnext" | string
+		target?: "es3" | "es5" | "es6" | "es2015" | "es2016" | "es2017" | "es2018" | "es2019" | "es2020" | "es2021" | "es2022" | "esnext" | string
 		module?: "none" | "commonjs" | "amd" | "system" | "umd" | "es6" | "es2015" | "esnext"
 		jsx?: "none" | "preserve" | "react-native" | "react" | "react-native" | "react-jsx"
 		moduleResolution?: "node" | "classic"
@@ -550,7 +550,7 @@ export function normalizeCompilerOptions(options: TypeScriptCompilerOptions["com
 			return typeof value === "string" ? value : String(value)
 		}
 		if (optionDeclaration.type === "list") {
-			return Array.isArray(value) ? value.map(item => convertOption(item, optionDeclaration.element!)).filter(item => item != undefined) : undefined
+			return Array.isArray(value) ? value.map(item => convertOption(item, optionDeclaration.element)).filter(item => item != undefined) : undefined
 		}
 		if (typeof optionDeclaration.type === "string") {
 			return typeof value === optionDeclaration.type ? value : undefined

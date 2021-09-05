@@ -47,32 +47,32 @@ export class TypeScriptDocParser {
 					switch (tag.tagName.text) {
 						case "file":
 						case "fileoverview":
-							result.summary = concatComment(result.summary, tag.comment)
+							result.summary = concatComment(result.summary, tag.comment as string)
 							break
 						case "author":
-							result.author = concatComment(result.author, tag.comment)
+							result.author = concatComment(result.author, tag.comment as string)
 							break
 						case "copyright":
-							result.copyright = concatComment(result.copyright, tag.comment)
+							result.copyright = concatComment(result.copyright, tag.comment as string)
 							break
 						case "license":
 						case "licence":
-							result.license = concatComment(result.license, tag.comment)
+							result.license = concatComment(result.license, tag.comment as string)
 							break
 						case "module":
 							result.isModule = true
 							if (tag.comment) {
-								result.name = tag.comment
+								result.name = tag.comment as string
 							}
 							break
 						case "version":
 						case "created":
 						case "modified":
-							result[tag.tagName.text] = tag.comment
+							result[tag.tagName.text] = tag.comment as string
 							break
 						default:
 							const unknownTags = result.unknownTags ??= Object.create(null)
-							unknownTags[tag.tagName.text] = concatComment(unknownTags[tag.tagName.text], tag.comment)
+							unknownTags[tag.tagName.text] = concatComment(unknownTags[tag.tagName.text], tag.comment as string)
 							break
 					}
 				}
@@ -298,22 +298,22 @@ export class TypeScriptDocParser {
 					break
 				case "example":
 					result.examples ??= []
-					result.examples.push(tag.text)
+					result.examples.push(ts.displayPartsToString(tag.text))
 					break
 				case "see":
 					result.seeAlso ??= []
-					result.seeAlso.push(tag.text)
+					result.seeAlso.push(ts.displayPartsToString(tag.text))
 					break
 				case "desc":
 				case "description":
 				case "remarks":
-					result.description = concatComment(result.description, tag.text)
+					result.description = concatComment(result.description, ts.displayPartsToString(tag.text))
 					break
 				case "internal":
 				case "package":
 					accessiblity = DocMemberModifiers.internal
 					if (tag.text) {
-						result.summary = concatComment(result.summary, tag.text)
+						result.summary = concatComment(result.summary, ts.displayPartsToString(tag.text))
 					}
 					break
 				case "ignore":
@@ -321,22 +321,22 @@ export class TypeScriptDocParser {
 					result.ignore = true
 					break
 				case "since":
-					result.since = concatComment(result.since, tag.text)
+					result.since = concatComment(result.since, ts.displayPartsToString(tag.text))
 					break
 				case "deprecated":
 					result.modifiers |= DocMemberModifiers.deprecated
 					if (tag.text) {
-						result.deprecatedMessage = concatComment(result.deprecatedMessage, tag.text)
+						result.deprecatedMessage = concatComment(result.deprecatedMessage, ts.displayPartsToString(tag.text))
 					}
 					break
 				case "default":
-					result.defaultValue = tag.text
+					result.defaultValue = ts.displayPartsToString(tag.text)
 					break
 				case "category":
-					result.category = tag.text
+					result.category = ts.displayPartsToString(tag.text)
 					break
 				case "summary":
-					result.summary = concatComment(result.summary, tag.text)
+					result.summary = concatComment(result.summary, ts.displayPartsToString(tag.text))
 					break
 				case "experimental":
 				case "beta":
@@ -349,23 +349,23 @@ export class TypeScriptDocParser {
 				case "private":
 					accessiblity = DocMemberModifiers.private
 					if (tag.text) {
-						result.summary = concatComment(result.summary, tag.text)
+						result.summary = concatComment(result.summary, ts.displayPartsToString(tag.text))
 					}
 					break
 				case "protected":
 					accessiblity = DocMemberModifiers.protected
 					if (tag.text) {
-						result.summary = concatComment(result.summary, tag.text)
+						result.summary = concatComment(result.summary, ts.displayPartsToString(tag.text))
 					}
 					break
 				case "public":
 					accessiblity = DocMemberModifiers.public
 					if (tag.text) {
-						result.summary = concatComment(result.summary, tag.text)
+						result.summary = concatComment(result.summary, ts.displayPartsToString(tag.text))
 					}
 					break
 				case "access":
-					switch (tag.text) {
+					switch (ts.displayPartsToString(tag.text)) {
 						case "package":
 						case "internal":
 							accessiblity = DocMemberModifiers.internal
@@ -392,7 +392,7 @@ export class TypeScriptDocParser {
 					result.modifiers |= DocMemberModifiers.readOnly
 					break
 				case "name":
-					result.name = tag.text
+					result.name = ts.displayPartsToString(tag.text)
 					break
 				case "type":
 				case "template":
@@ -400,7 +400,7 @@ export class TypeScriptDocParser {
 					break
 				default:
 					const unknownTags = result.unknownTags ??= Object.create(null)
-					unknownTags[tag.name] = concatComment(unknownTags[tag.name], tag.text)
+					unknownTags[tag.name] = concatComment(unknownTags[tag.name], ts.displayPartsToString(tag.text))
 					break
 			}
 		}
@@ -516,7 +516,7 @@ export class TypeScriptDocParser {
 				result.parameters = []
 				result.returnType = type
 			}
-			result.returnSummary = ts.getJSDocReturnTag(declaration)?.comment
+			result.returnSummary = ts.getJSDocReturnTag(declaration)?.comment as string
 			return
 		}
 		const signature = this.checker.getSignatureFromDeclaration(declaration)
@@ -528,7 +528,7 @@ export class TypeScriptDocParser {
 		result.typeParameters = signature.getTypeParameters()?.map(typeParameter => this.parseTypeParameter(typeParameter))
 		result.parameters = signature.getParameters().map(parameter => this.parseParameter(parameter))
 		result.returnType = this.getDocType(this.checker.getReturnTypeOfSignature(signature))
-		result.returnSummary = ts.getJSDocReturnTag(declaration)?.comment
+		result.returnSummary = ts.getJSDocReturnTag(declaration)?.comment as string
 		// 解析子参数
 		for (const paramTag of ts.getAllJSDocTagsOfKind(declaration, ts.SyntaxKind.JSDocParameterTag) as ts.JSDocParameterTag[]) {
 			if (paramTag.name.kind === ts.SyntaxKind.QualifiedName) {
@@ -540,7 +540,7 @@ export class TypeScriptDocParser {
 						name: paramTag.name.right.text,
 						optional: paramTag.isBracketed,
 						type: paramTag.typeExpression ? this.getDocType(this.checker.getTypeFromTypeNode(paramTag.typeExpression)) : undefined,
-						summary: paramTag.comment
+						summary: paramTag.comment as string
 					})
 				}
 			}

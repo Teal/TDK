@@ -1,0 +1,98 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.json",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint/eslint-plugin"
+    ],
+    "rules": {
+        "@typescript-eslint/consistent-type-assertions": "warn",
+        "@typescript-eslint/consistent-type-definitions": "warn",
+        "@typescript-eslint/naming-convention": "warn",
+        "@typescript-eslint/no-for-in-array": "warn",
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-misused-new": "warn",
+        "@typescript-eslint/no-unnecessary-type-assertion": "warn",
+        "@typescript-eslint/prefer-for-of": "warn",
+        "@typescript-eslint/prefer-namespace-keyword": "warn",
+        "@typescript-eslint/type-annotation-spacing": "warn",
+        "arrow-body-style": "warn",
+        "brace-style": [
+            "warn",
+            "1tbs",
+            {
+                "allowSingleLine": true
+            }
+        ],
+        "jsx-quotes": "warn",
+        "constructor-super": "warn",
+        "eol-last": "off",
+        "id-blacklist": "warn",
+        "id-match": "warn",
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "warn",
+                    "dir",
+                    "time",
+                    "timeEnd",
+                    "timeLog",
+                    "trace",
+                    "assert",
+                    "clear",
+                    "count",
+                    "countReset",
+                    "group",
+                    "groupEnd",
+                    "table",
+                    "debug",
+                    "info",
+                    "dirxml",
+                    "error",
+                    "groupCollapsed",
+                    "Console",
+                    "profile",
+                    "profileEnd",
+                    "timeStamp",
+                    "context"
+                ]
+            }
+        ],
+        "no-debugger": "warn",
+        "no-duplicate-imports": "warn",
+        "no-template-curly-in-string": "warn",
+        "no-trailing-spaces": "warn",
+        "no-undef-init": "warn",
+        "one-var": [
+            "warn",
+            "never"
+        ],
+        "prefer-const": "warn",
+        "quotes": [
+            "warn",
+            "double",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "spaced-comment": [
+            "warn",
+            "always",
+            {
+                "markers": [
+                    "/"
+                ]
+            }
+        ]
+    }
+}

@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "configs";
 
 .doc-page-index {
@@ -17,7 +18,7 @@
 
 		.doc-navbar {
 			> ul > li {
-				padding: ($doc-header-height - 2.25rem) / 2 1.5rem - .75rem;
+				padding: math.div($doc-header-height - 2.25rem, 2) 1.5rem - .75rem;
 				line-height: 2.25rem;
 
 				@media (max-width: $doc-screen-large) {

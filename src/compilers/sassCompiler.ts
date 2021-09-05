@@ -1,4 +1,4 @@
-import sass from "node-sass"
+import sass from "sass"
 import { basename, dirname, join, normalize } from "path"
 import { Builder, CompileResult } from "../builder"
 

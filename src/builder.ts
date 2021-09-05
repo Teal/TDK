@@ -153,7 +153,8 @@ export class Builder {
 				locale: `zh-cn`,
 				sourceMap: options.sourceMap,
 				sourceRoot: options.sourceMapRoot,
-				...options.ts
+				...options.ts,
+				strictNullChecks: false
 			},
 			renameModuleName: (moduleName, sourceFile) => {
 				const builtinModule = options.modules[moduleName]
@@ -164,7 +165,7 @@ export class Builder {
 				const resolvedModule = sourceFile.resolvedModules.get(moduleName)
 				let resolvedFileName: string
 				if (resolvedModule) {
-					resolvedFileName = /\.d\.ts$/i.test(resolvedModule.resolvedFileName) ? this.typeScriptCompiler.resolveJSModuleName(moduleName, containingFile) : setExt(resolvedModule.resolvedFileName, ".js")
+					resolvedFileName = /\.d\.ts$/i.test(resolvedModule.resolvedFileName) ? this.typeScriptCompiler.resolveJSModuleName(moduleName, containingFile) || moduleName : setExt(resolvedModule.resolvedFileName, ".js")
 					if (resolvedModule.isExternalLibraryImport) {
 						const nodeModules = resolvePath(this.options.baseDir, "node_modules")
 						let path = relativePath(nodeModules, resolvedFileName)

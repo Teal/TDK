@@ -4,11 +4,49 @@
 		"editor.insertSpaces": true,
 		"editor.tabSize": 2
 	},
-	"tslint.configFile": ".vscode/tslint.json",
-	"tslint.exclude": "**/*.test.*",
-	"tslint.alwaysShowRuleFailuresAsWarnings": true,
-	"tslint.suppressWhileTypeErrorsPresent": false,
-	"sasslint.enable": true,
-	"sasslint.configFile": ".vscode/.sass-lint.yml",
-	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"html.format.extraLiners": "",
+	"html.format.maxPreserveNewLines": null,
+	"html.format.wrapLineLength": 0,
+	"html.format.contentUnformatted": "pre,code,textarea,svg",
+	"beautify.config": ".vscode/.jsbeautifyrc",
+	"beautify.language": {
+		"js": [],
+		"css": [
+			"css",
+			"scss",
+			"sass",
+			"less",
+			"styl"
+		],
+		"html": []
+	},
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
+	],
+	"eslint.options": {
+		"configFile": ".vscode/.eslintrc.json"
+	},
+	"stylelint.configFile": ".vscode/.stylelintrc.json",
+	"stylelint.validate": [
+		"css",
+		"html",
+		"less",
+		"markdown",
+		"postcss",
+		"sass",
+		"scss",
+		"source.css.styled",
+		"source.markdown.math",
+		"styled-css",
+		"sugarss",
+		"svelte",
+		"vue",
+		"vue-html",
+		"vue-postcss",
+		"xml",
+		"xsl"
+	]
 }

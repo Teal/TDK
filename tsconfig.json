@@ -15,7 +15,12 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"forceConsistentCasingInFileNames": true,
-		"allowUmdGlobalAccess": true
+		"allowUmdGlobalAccess": true,
+		"paths": {
+			"~/*": [
+				"./*"
+			]
+		}
 	},
 	"include": [
 		"./src"

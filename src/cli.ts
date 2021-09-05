@@ -9,7 +9,7 @@ function main(argv: string[]) {
 	exitOnUncaughError()
 	if (/^v(?:\d|10\.\d|10\.1[01])\./.test(process.version)) {
 		console.error(`[×] TDK 需要 Node.js v10.12 或更高版本(现在是 ${process.version})`)
-		console.info(`请访问 https://nodejs.org/ 下载安装最新版本`)
+		console.info("请访问 https://nodejs.org/ 下载安装最新版本")
 		return process.exit(-1)
 	}
 	const { parseCommandLineArguments } = require("tutils/commandLine") as typeof import("tutils/commandLine")

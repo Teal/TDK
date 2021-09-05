@@ -170,8 +170,8 @@ export class DocCompiler {
 								<details class="doc-section doc doc-demo-code" open={open}>
 									<summary>
 										{toolbar}
-											查看源码
-										</summary>
+										查看源码
+									</summary>
 									<pre class={preClassName}>
 										<code class={`doc-language-${language}`} contenteditable="false" autocorrect="off" autocapitalize="off" spellcheck="false">
 											{sourceCode}
@@ -180,11 +180,11 @@ export class DocCompiler {
 								</details>
 								{js}
 							</div> : <>
-										<div id={compiledCode.container} class={`doc-run-result ${bodyClassName}`}>
-											{html}
-										</div>
-										{js}
-									</>}
+								<div id={compiledCode.container} class={`doc-run-result ${bodyClassName}`}>
+									{html}
+								</div>
+								{js}
+							</>}
 							{new HTML(`<div class="doc doc-section">`)}
 						</>
 					}
@@ -1169,7 +1169,7 @@ if (typeof exports !== "undefined") {
 				</h4>
 				{member.summary ? this.renderDocMemberSummary(member, context) : <div class="doc-api-summary">
 					初始化新的 {this.renderDocMemberLink(parentMember, context)} 实例
-				{this.renderDocDeprecatedMessage(member, context)}
+					{this.renderDocDeprecatedMessage(member, context)}
 				</div>}
 			</div>
 			<div class="doc-api-body">
@@ -1831,9 +1831,9 @@ if (typeof exports !== "undefined") {
 						list[3] = <span class="doc-more" onclick="DOC.showMoreDetails(this)">
 							... {deleted.length} more ...
 							<span class="doc-more-details">{deleted.map((item, index) => <>
-							{index ? <span class="doc-token-punctuation"> {type.typeType === DocTypeType.union ? "|" : "&"} </span> : null}
-							{item}
-						</>)}</span>
+								{index ? <span class="doc-token-punctuation"> {type.typeType === DocTypeType.union ? "|" : "&"} </span> : null}
+								{item}
+							</>)}</span>
 						</span>
 					}
 					return list.map((item, index) => <>
@@ -2081,7 +2081,7 @@ if (typeof exports !== "undefined") {
 			module: "esnext",
 			jsx: "preserve",
 			sourceMap: false
-		}).content
+		}).content.replace(/;\n*$/, "")
 		const code = highlight(text, "js", "doc-token-")
 		return <code>{new HTML(code)}</code>
 	}

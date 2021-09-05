@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "configs";
 
 .doc-page {
@@ -46,7 +47,7 @@
 	}
 
 	.doc-popup {
-		top: ($doc-header-height + 1.5rem) / 2 + .375rem;
+		top: math.div($doc-header-height + 1.5rem, 2) + .375rem;
 		margin-top: 0 !important;
 	}
 }
@@ -233,7 +234,7 @@
 
 	> .doc-icon {
 		position: absolute;
-		top: $doc-header-height / 2 - .5rem;
+		top: math.div($doc-header-height, 2) - .5rem;
 		left: 2.25rem;
 		color: $doc-tip-color;
 		transition: color $doc-duration;
@@ -245,7 +246,7 @@
 		box-sizing: border-box;
 		width: 16rem;
 		border: 1px solid tint($doc-border-color, 50%);
-		border-radius: (1.5rem + .35rem * 2) / 2;
+		border-radius: math.div(1.5rem + .35rem * 2, 2);
 		background-color: $doc-body-background-color;
 		padding: .35rem .75rem .35rem 2rem;
 		outline-width: 0;
@@ -272,7 +273,7 @@
 	}
 
 	> .doc-popup {
-		top: ($doc-header-height + 1.5rem + .35rem * 2) / 2;
+		top: math.div($doc-header-height + 1.5rem + .35rem * 2, 2);
 		left: 1.5rem + 2rem - 1.25rem;
 		right: 1.5rem + 2rem - 1.25rem;
 		max-height: 61.8vh;
@@ -809,7 +810,7 @@
 	position: absolute;
 	top: .5rem + .125rem;
 	left: 0;
-	margin: (1.5rem - .25rem) / 4 0;
+	margin: math.div(1.5rem - .25rem, 4) 0;
 	width: .25rem;
 	height: .25rem;
 	border: .0625rem solid $doc-primary-color;
@@ -1188,19 +1189,19 @@ button.doc-toc-title, .doc-toc-more {
 		font-weight: 600;
 		white-space: nowrap;
 
-		&:before, &:after {
+		&::before, &::after {
 			content: "";
 			position: absolute;
 			left: 0;
 			width: 100%;
 		}
 
-		&:before {
+		&::before {
 			top: -1px;
 			border-top: 1px solid tint($doc-border-color, 40%);
 		}
 
-		&:after {
+		&::after {
 			bottom: -1px;
 			border-bottom: 1px solid tint($doc-border-color, 40%);
 		}
@@ -1228,7 +1229,7 @@ button.doc-toc-title, .doc-toc-more {
 			th {
 				position: static;
 
-				&:before, &:after {
+				&::before, &::after {
 					display: none;
 				}
 			}
@@ -1373,13 +1374,13 @@ button.doc-toc-title, .doc-toc-more {
 		}
 	}
 
-	input[type=radio], input[type=checkbox], input[type=button], input[type=submit], input[type=reset], button {
+	input[type="radio"], input[type="checkbox"], input[type="button"], input[type="submit"], input[type="reset"], button {
 		&:focus {
 			box-shadow: 0 0 0 2px rgba($doc-primary-color, .3);
 		}
 	}
 
-	input[type=radio], input[type=checkbox] {
+	input[type="radio"], input[type="checkbox"] {
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
@@ -1403,7 +1404,7 @@ button.doc-toc-title, .doc-toc-more {
 		}
 	}
 
-	input[type=radio] {
+	input[type="radio"] {
 		border-radius: 50%;
 
 		&::after {
@@ -1428,11 +1429,11 @@ button.doc-toc-title, .doc-toc-more {
 		}
 	}
 
-	input[type=checkbox] {
+	input[type="checkbox"] {
 		&::after {
 			content: "";
 			display: block;
-			margin-left: (.76rem - .275rem) / 2;
+			margin-left: math.div(.76rem - .275rem, 2);
 			width: .275rem;
 			height: .55rem;
 			border-width: 0 .125rem .125rem 0;
@@ -1475,7 +1476,7 @@ button.doc-toc-title, .doc-toc-more {
 		height: 9em;
 	}
 
-	input[type=button], input[type=submit], input[type=reset], button {
+	input[type="button"], input[type="submit"], input[type="reset"], button {
 		-webkit-appearance: none;
 		padding: .375rem 1rem;
 		transition: background-color $doc-duration, box-shadow $doc-duration;
@@ -1486,7 +1487,7 @@ button.doc-toc-title, .doc-toc-more {
 		}
 	}
 
-	input[type=submit], button[type=submit] {
+	input[type="submit"], button[type="submit"] {
 		border-color: tint($doc-primary-color, 5%);
 		background-color: tint($doc-primary-color, 5%);
 		color: contrast();
@@ -1616,15 +1617,15 @@ button.doc-toc-title, .doc-toc-more {
 	white-space: nowrap;
 
 	h2 > & {
-		margin-top: (1.7rem * 1.5 - 1.5rem) / 2;
+		margin-top: math.div(1.7rem * 1.5 - 1.5rem, 2);
 	}
 
 	h3 > & {
-		margin-top: (1.5rem * 1.5 - 1.5rem) / 2;
+		margin-top: math.div(1.5rem * 1.5 - 1.5rem, 2);
 	}
 
 	h4 > & {
-		margin-top: (1.3rem * 1.5 - 1.5rem) / 2;
+		margin-top: math.div(1.3rem * 1.5 - 1.5rem, 2);
 	}
 }
 
@@ -2369,7 +2370,7 @@ a.doc-card:hover {
 		display: block;
 		position: sticky;
 		top: -7rem;
-		right: -(4rem * 2 + $doc-toc-width / 2);
+		right: -(4rem * 2 + math.div($doc-toc-width, 2));
 		width: 2.75rem;
 		height: 2.75rem;
 		border-radius: 50%;
