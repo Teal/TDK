@@ -147,22 +147,30 @@ require._execute = module => {
  */
 require.resolve = (name, baseURL) => {
 	if (/^\.\.?(\/|$)/.test(name)) {
-		name = (baseURL || require.currentScript()).replace(/[^\/]*$/, "") + name.replace(/^\.\//, "")
+		name = (baseURL || require.currentScript()).replace(/[^\/]*$/, "") + name
+		if (!require.getLoader(name)) {
+			name += ".js"
+		}
 	} else if (name.charCodeAt(0) === 47 /*/*/) {
 		name = `${location.protocol}${name.charCodeAt(1) === 47 /*/*/ ? name : `//${location.host}${name}`}`
 	} else if (!/:\/\//.test(name)) {
 		name = `${location.protocol}//${location.host}${location.pathname.replace(/\/[^\/]*$/, "/")}${name}`
+		if (!require.getLoader(name)) {
+			name += ".js"
+		}
 	}
-	let slashIndex
-	while ((slashIndex = name.search(/\/\.\.?(\/|$)/)) >= 0) {
-		if (name.charCodeAt(slashIndex + 2) === 46 /*.*/) {
-			const left = name.slice(0, name.lastIndexOf("/", slashIndex - 1) + 1)
-			if (!/^.*:\/\/[^/]*\//.test(left)) {
-				break
-			}
-			name = left + name.slice(slashIndex + 4)
-		} else {
-			name = name.slice(0, slashIndex + 1) + name.slice(slashIndex + 3)
+	while (true) {
+		const oldName = name
+		name = name.replace(/(^|\/)\.\//, "$1")
+		if (oldName.length === name.length) {
+			break
+		}
+	}
+	while (true) {
+		const oldName = name
+		name = name.replace(/(^|\/)[^/]*\/\.\.(\/|$)/, (_, prefix, postfix) => postfix && prefix ? postfix : "")
+		if (oldName.length === name.length) {
+			break
 		}
 	}
 	return name
@@ -172,15 +180,22 @@ require.resolve = (name, baseURL) => {
 require.urlArgs = ""
 
 /**
+ * 获取指定地址的加载器
+ * @param {string} url 要加载的地址
+ */
+require.getLoader = url => {
+	const match = /\.[^\.\/\\]+$/.exec(url)
+	return match && require.extensions[match[0].toLowerCase()]
+}
+
+/**
  * 底层加载一个模块
  * @param {string} url 要加载的地址
  * @param {Function} onLoad 加载成功的回调函数
  * @param {Function} [onError] 加载失败的回调函数
  */
 require.load = (url, onLoad, onError) => {
-	const match = /\.[^\.\/\\]+$/.exec(url)
-	const loader = match && require.extensions[match[0].toLowerCase()] || require.extensions[".js"]
-	loader(url, onLoad, onError)
+	(require.getLoader(url) || require.extensions[".js"])(url, onLoad, onError)
 }
 
 /** 获取不同扩展名的载入方式 */
