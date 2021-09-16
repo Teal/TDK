@@ -322,6 +322,11 @@ export class TypeScriptCompiler {
 					const options = readTSConfig(configFilePath, this.configFilePaths)
 					if (options) {
 						const result = Object.assign(options, this.compilerOptions)
+						result.allowJs ??= true
+						result.allowNonTsExtensions ??= true
+						result.suppressOutputPathCheck = true
+						delete result.outDir
+						delete result.outFile
 						this._compilerOptionsCache.set(dir, result)
 						return result
 					}

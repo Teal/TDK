@@ -957,6 +957,9 @@ export class TypeScriptDocParser {
 	/** 缓存键 */
 	private static readonly _docKey: unique symbol = Symbol("doc")
 
+	/** 解析的深度 */
+	private _parseDepth = 0
+
 	/** 解析数据并缓存 */
 	private _parseCached<T, R extends { raw: T }>(node: T, parser: (node: T, result: R) => void) {
 		const cached = node[TypeScriptDocParser._docKey]
@@ -964,7 +967,13 @@ export class TypeScriptDocParser {
 			return cached as R
 		}
 		const result = node[TypeScriptDocParser._docKey] = {} as R
-		parser(node, result)
+		if (this._parseDepth < 20) {
+			this._parseDepth++
+			parser(node, result)
+			this._parseDepth--
+		} else {
+			result.raw = node
+		}
 		return result
 	}
 
