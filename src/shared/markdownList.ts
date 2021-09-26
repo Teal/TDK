@@ -22,7 +22,7 @@ export function parseMarkdownList(content: string) {
 			indent: indentString.replace(/\t/g, "  ").length,
 			checked: checkedString === undefined ? undefined : checkedString.includes("x") || checkedString.includes("X"),
 			title: subtitleMatch ? subtitleMatch[1] : title,
-			subtitle: subtitleMatch?.[2] ?? (url ? getName(url, false) : undefined),
+			subtitle: subtitleMatch?.[2] ?? (url ? getName(url, false).replace(/^[a-z]/, w => w.toUpperCase()) : undefined),
 			url: url
 		}
 		let stackTop = stack[stack.length - 1]
