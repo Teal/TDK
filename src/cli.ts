@@ -3,7 +3,7 @@ main(process.argv)
 
 /** 入口函数 */
 function main(argv: string[]) {
-	if (requireLocal("tdk/dist/cli.js")) {
+	if (!argv[1]?.endsWith(".ts") && requireLocal("tdk/dist/cli.js")) {
 		return
 	}
 	exitOnUncaughError()
