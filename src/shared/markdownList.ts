@@ -1,5 +1,3 @@
-import { getName } from "tutils/path"
-
 /**
  * 解析 Markdown 语法的列表
  * @param content 要解析的内容
@@ -22,7 +20,7 @@ export function parseMarkdownList(content: string) {
 			indent: indentString.replace(/\t/g, "  ").length,
 			checked: checkedString === undefined ? undefined : checkedString.includes("x") || checkedString.includes("X"),
 			title: subtitleMatch ? subtitleMatch[1] : title,
-			subtitle: subtitleMatch?.[2] ?? (url ? getName(url, false).replace(/^[a-z]/, w => w.toUpperCase()) : undefined),
+			subtitle: subtitleMatch?.[2],
 			url: url
 		}
 		let stackTop = stack[stack.length - 1]

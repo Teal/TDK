@@ -1,6 +1,6 @@
 {
   "name": "tdk",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": "https://github.com/Teal/TDK",
   "description": "零配置的前端组件化解决方案，提供 API 文档生成、在线演示、自动化测试等功能",
   "license": "SEE LICENSE IN LICENSE",

@@ -180,11 +180,11 @@ export class DocCompiler {
 								</details>
 								{js}
 							</div> : <>
-										<div id={compiledCode.container} class={`doc-run-result ${bodyClassName}`}>
-											{html}
-										</div>
-										{js}
-									</>}
+								<div id={compiledCode.container} class={`doc-run-result ${bodyClassName}`}>
+									{html}
+								</div>
+								{js}
+							</>}
 							{new HTML(`<div class="doc doc-section">`)}
 						</>
 					}
@@ -274,9 +274,7 @@ export class DocCompiler {
 
 if (typeof exports !== "undefined") {
 	for (var key in exports) {
-		if (window[key] === undefined) {
-			window[key] = exports[key];
-		}
+		window[key] = exports[key];
 	}
 }`, `${context.sourceURL || ""}#${scriptID}.${lang}`, "transpileOnly", undefined, undefined, { sourceMap: false })
 		result.content = result.content.replace(/^define\(/m, "require\(")
@@ -476,8 +474,8 @@ if (typeof exports !== "undefined") {
 				context.dependencies.push(...cssAsset.dependencies)
 				if (cssAsset.type === AssetType.file) {
 					context.codeURL = this.builder.toURL(cssAsset.dependencies[cssAsset.dependencies.length - 1] as string)
+					loader = `<script>require("./${getName(outPath, false)}.css")</script>`
 				}
-				loader = `<script>require("./${getName(outPath, false)}.css")</script>`
 			}
 		}
 		// 计算版本和作者
@@ -1840,9 +1838,9 @@ if (typeof exports !== "undefined") {
 						list[3] = <span class="doc-more" onclick="DOC.showMoreDetails(this)">
 							... {deleted.length} more ...
 							<span class="doc-more-details">{deleted.map((item, index) => <>
-							{index ? <span class="doc-token-punctuation"> {type.typeType === DocTypeType.union ? "|" : "&"} </span> : null}
-							{item}
-						</>)}</span>
+								{index ? <span class="doc-token-punctuation"> {type.typeType === DocTypeType.union ? "|" : "&"} </span> : null}
+								{item}
+							</>)}</span>
 						</span>
 					}
 					return list.map((item, index) => <>
@@ -2145,7 +2143,7 @@ if (typeof exports !== "undefined") {
 				const [childHTML, childCount] = this.renderWaterFall(item.children, baseURL)
 				html += <h2 id={item.title}>
 					{item.title}
-					{item.subtitle ? <small>{item.subtitle}</small> : null}
+					{item.subtitle ? <small>{item.subtitle}</small> : item.url ? <small>{getName(item.url, false).replace(/^[a-z]/, w => w.toUpperCase())}</small> : undefined}
 					<span class="doc-tag">{childCount}</span>
 				</h2>
 				html += childHTML
