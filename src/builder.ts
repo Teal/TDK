@@ -15,7 +15,7 @@ export class Builder {
 	/** 获取构建器的选项 */
 	readonly options: BuilderOptions = {
 		baseDir: ".",
-		ignore: [".*", "_*", "*~", "*.tmp", "node_modules", "Desktop.ini", "Thumbs.db", "ehthumbs.db", "/dist", "/built", "/bin", "/out"],
+		ignore: [".*", "_*", "*~", "*.tmp", "node_modules", "Desktop.ini", "Thumbs.db", "ehthumbs.db", "/dist", "/built", "/bin", "/out", "*.config.{js,ts}"],
 		srcDir: "components",
 		outDir: "dist",
 		assetsDir: __dirname + "/../assets",
