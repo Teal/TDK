@@ -8,7 +8,7 @@ export default async function (options: any) {
 	if (openURL) {
 		const { open } = require("tutils/process") as typeof import("tutils/process")
 		const { resolveURL } = require("tutils/url") as typeof import("tutils/url")
-		await open(resolveURL(devServer.url ?? `http://localhost:${devServer.port}${devServer.rootPath}`, openURL ?? devServer.builder.options.srcDir))
+		await open(resolveURL(devServer.url ?? `http://localhost:${devServer.port}${devServer.rootPath || "/"}`, openURL ?? devServer.builder.options.srcDir))
 	}
 	return devServer
 }
