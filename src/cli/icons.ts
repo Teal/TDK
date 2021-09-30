@@ -6,7 +6,7 @@ import { translateSVG } from "../shared/svgTranslator"
 
 /**
  * 打包图标文件
- * @param options 
+ * @param options 选项
  */
 export default async function (options: any) {
 	const inputs: string[] = []
