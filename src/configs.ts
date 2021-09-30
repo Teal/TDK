@@ -34,7 +34,7 @@ export function readConfigs(path = "package.json") {
 			doc.repository = exec("git", ["config", "remote.origin.url"])
 		}
 	}
-	doc.repository = doc.repository?.replace(/\/$|\.git$/i, "").replace(/^git@(.*?)[:\/](.*)$/i, "https://$1/$2")
+	doc.repository = doc.repository?.replace(/\/$|\.git$/i, "").replace(/^git@([^:\/]*)[:\/](.*)$/i, "https://$1/$2").replace(/^ssh:\/\/(?:git@)?([^:\/]*)(?::\d+)?\/(.*)$/i, "http://$1/$2")
 	if (doc.branch === undefined && git) {
 		for (let prevDir = "", dir = process.cwd(); prevDir.length !== dir.length; prevDir = dir, dir = getDir(dir)) {
 			const path = joinPath(dir, ".git/HEAD")

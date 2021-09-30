@@ -1515,7 +1515,7 @@ if (typeof exports !== "undefined") {
 		const parent = member.parentMember && member.parentMember.memberType !== DocMemberType.unknown ? this.renderDocMemberLink(member.parentMember, context, member.overridingMember ?? member.baseMember) : null
 		const sourceLocation = member.sourceLocation
 		const sourceHref = sourceLocation ? this.getSourceURL(sourceLocation) : undefined
-		const source = sourceHref ? <a href={sourceHref} class="doc-toolbar-button" aria-label="查看源码">
+		const source = sourceHref ? <a href={sourceHref} target="_blank" class="doc-toolbar-button" aria-label="查看源码">
 			{this.renderIcon("code")}
 			<span class="doc-tooltip doc-arrow">查看源码<br /><small>(共 {sourceLocation.endLine - sourceLocation.line + 1} 行)</small></span>
 		</a> : null
@@ -2364,7 +2364,12 @@ if (typeof exports !== "undefined") {
 			extensions = []
 			for (const compiler of this.builder.compilers) {
 				if (compiler.outExt === ".html") {
-					extensions.push(...compiler.inExts)
+					for (const inExt of compiler.inExts) {
+						if (inExt === ".svg") {
+							continue
+						}
+						extensions.push(inExt)
+					}
 				}
 			}
 		}
@@ -2372,6 +2377,9 @@ if (typeof exports !== "undefined") {
 		const entries = await this.builder.fs.readDir(dir, true)
 		next: for (const entry of entries) {
 			const path = joinPath(dir, entry.name)
+			if (this.builder.isIgnored(path)) {
+				continue
+			}
 			if (entry.isDirectory()) {
 				// 如果文件夹存在首页，则链到首页
 				const mainPath = joinPath(path, this.builder.getMainFileName(path) + ".md")
