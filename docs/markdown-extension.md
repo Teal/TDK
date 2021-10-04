@@ -154,16 +154,16 @@ var div = <div>Hello</div>
 > TDK 内部使用了 [Prism.js](https://prismjs.com/) 实现语法高亮，[查看支持的语言列表](https://prismjs.com/#languages-list)。
 
 ### 高亮行
-在代码开头添加 `*`、`+` 或 `-`，**并紧跟一个空格或制表符**，可以高亮该行：
+在代码开头添加 `>`、`+` 或 `-`，**并紧跟一个空格或制表符**，可以高亮该行：
 
 ````md example .doc
 ```jsx
 import { render, VNode, Control } from "~/admin/control"
 
 class A extends Control {
-\*	render() {
-\*		return <h1>Hello, </h1>
-\*	}
+\>	render() {
+\>		return <h1>Hello, </h1>
+\>	}
 }
 
 render(<A>
@@ -173,7 +173,7 @@ render(<A>
 ```
 ````
 
-> [i] 如果不希望行首的 `*`、`+` 或 `-` 作为高亮的标记，应在该字符前添加反斜杠 `\`。
+> [i] 如果不希望行首的 `>`、`+` 或 `-` 作为高亮的标记，应在该字符前添加反斜杠 `\`。
 
 ### 限制代码块高度
 在代码块的反引号后添加 `scrollable`，可以在代码太长时显示垂直滚动条：

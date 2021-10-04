@@ -44,8 +44,8 @@ export function highlight(content: string, language: string, classPrefix = "") {
 		const lines = originalContent.split(/\r?\n/)
 		content = content.split(/\r?\n/).map((line, index) => {
 			const originalLine = lines[index]
-			if (/^[\+\-\*][ \t]/.test(originalLine)) {
-				return `<span class="${classPrefix}${originalLine.startsWith("*") ? "highlight" : originalLine.startsWith("+") ? "inserted" : "deleted"}">${originalLine.startsWith("*") ? "" : originalLine[0]}${line}</span>`
+			if (/^[\+\-\>][ \t]/.test(originalLine)) {
+				return `<span class="${classPrefix}${originalLine.startsWith(">") ? "highlight" : originalLine.startsWith("+") ? "inserted" : "deleted"}">${originalLine.startsWith(">") ? "" : originalLine[0]}${line}</span>`
 			}
 			return line
 		}).join("\n")
@@ -58,7 +58,7 @@ export function highlight(content: string, language: string, classPrefix = "") {
  * @param content 要高亮的内容
  */
 export function removeHighlightMarkers(content: string) {
-	return content.replace(/^[\+\-\*][ \t]|^\\[\+\-\*\\]/mg, all => {
+	return content.replace(/^[\+\-\>][ \t]|^\\[\+\-\>\\]/mg, all => {
 		if (all.charCodeAt(1) === 32) {
 			return ""
 		}
