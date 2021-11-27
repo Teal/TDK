@@ -47,32 +47,32 @@ export class TypeScriptDocParser {
 					switch (tag.tagName.text) {
 						case "file":
 						case "fileoverview":
-							result.summary = concatComment(result.summary, tag.comment as string)
+							result.summary = concatComment(result.summary, ts.getTextOfJSDocComment(tag.comment))
 							break
 						case "author":
-							result.author = concatComment(result.author, tag.comment as string)
+							result.author = concatComment(result.author, ts.getTextOfJSDocComment(tag.comment))
 							break
 						case "copyright":
-							result.copyright = concatComment(result.copyright, tag.comment as string)
+							result.copyright = concatComment(result.copyright, ts.getTextOfJSDocComment(tag.comment))
 							break
 						case "license":
 						case "licence":
-							result.license = concatComment(result.license, tag.comment as string)
+							result.license = concatComment(result.license, ts.getTextOfJSDocComment(tag.comment))
 							break
 						case "module":
 							result.isModule = true
 							if (tag.comment) {
-								result.name = tag.comment as string
+								result.name = ts.getTextOfJSDocComment(tag.comment)
 							}
 							break
 						case "version":
 						case "created":
 						case "modified":
-							result[tag.tagName.text] = tag.comment as string
+							result[tag.tagName.text] = ts.getTextOfJSDocComment(tag.comment)
 							break
 						default:
 							const unknownTags = result.unknownTags ??= Object.create(null)
-							unknownTags[tag.tagName.text] = concatComment(unknownTags[tag.tagName.text], tag.comment as string)
+							unknownTags[tag.tagName.text] = concatComment(unknownTags[tag.tagName.text], ts.getTextOfJSDocComment(tag.comment))
 							break
 					}
 				}
@@ -516,7 +516,7 @@ export class TypeScriptDocParser {
 				result.parameters = []
 				result.returnType = type
 			}
-			result.returnSummary = ts.getJSDocReturnTag(declaration)?.comment as string
+			result.returnSummary = ts.getTextOfJSDocComment(ts.getJSDocReturnTag(declaration)?.comment)
 			return
 		}
 		const signature = this.checker.getSignatureFromDeclaration(declaration)
@@ -528,7 +528,7 @@ export class TypeScriptDocParser {
 		result.typeParameters = signature.getTypeParameters()?.map(typeParameter => this.parseTypeParameter(typeParameter))
 		result.parameters = signature.getParameters().map(parameter => this.parseParameter(parameter))
 		result.returnType = this.getDocType(this.checker.getReturnTypeOfSignature(signature))
-		result.returnSummary = ts.getJSDocReturnTag(declaration)?.comment as string
+		result.returnSummary = ts.getTextOfJSDocComment(ts.getJSDocReturnTag(declaration)?.comment)
 		// 解析子参数
 		for (const paramTag of ts.getAllJSDocTagsOfKind(declaration, ts.SyntaxKind.JSDocParameterTag) as ts.JSDocParameterTag[]) {
 			if (paramTag.name.kind === ts.SyntaxKind.QualifiedName) {
@@ -540,7 +540,7 @@ export class TypeScriptDocParser {
 						name: paramTag.name.right.text,
 						optional: paramTag.isBracketed,
 						type: paramTag.typeExpression ? this.getDocType(this.checker.getTypeFromTypeNode(paramTag.typeExpression)) : undefined,
-						summary: paramTag.comment as string
+						summary: ts.getTextOfJSDocComment(paramTag.comment)
 					})
 				}
 			}
