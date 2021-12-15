@@ -1,14 +1,17 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es6": true,
+        "worker": true,
         "node": true
     },
-    "root": true,
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "project": "tsconfig.json",
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": [
+            "tsconfig.json"
+        ]
     },
     "plugins": [
         "@typescript-eslint/eslint-plugin"
@@ -16,27 +19,52 @@
     "rules": {
         "@typescript-eslint/consistent-type-assertions": "warn",
         "@typescript-eslint/consistent-type-definitions": "warn",
-        "@typescript-eslint/naming-convention": "warn",
+        "@typescript-eslint/indent": [
+            "warn",
+            "tab",
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "@typescript-eslint/naming-convention": [
+            "warn",
+            {
+                "format": [
+                    "camelCase",
+                    "UPPER_CASE",
+                    "PascalCase"
+                ],
+                "selector": [
+                    "variableLike",
+                    "method",
+                    "classProperty",
+                    "typeProperty"
+                ],
+                "leadingUnderscore": "allowSingleOrDouble",
+                "trailingUnderscore": "allowSingleOrDouble"
+            },
+            {
+                "format": [
+                    "PascalCase"
+                ],
+                "selector": [
+                    "typeLike"
+                ]
+            }
+        ],
         "@typescript-eslint/no-for-in-array": "warn",
         "@typescript-eslint/no-inferrable-types": "warn",
         "@typescript-eslint/no-misused-new": "warn",
         "@typescript-eslint/no-unnecessary-type-assertion": "warn",
         "@typescript-eslint/prefer-for-of": "warn",
+        "@typescript-eslint/prefer-regexp-exec": "warn",
         "@typescript-eslint/prefer-namespace-keyword": "warn",
         "@typescript-eslint/type-annotation-spacing": "warn",
-        "arrow-body-style": "warn",
-        "brace-style": [
+        "arrow-body-style": [
             "warn",
-            "1tbs",
-            {
-                "allowSingleLine": true
-            }
+            "as-needed"
         ],
-        "jsx-quotes": "warn",
-        "constructor-super": "warn",
-        "eol-last": "off",
-        "id-blacklist": "warn",
-        "id-match": "warn",
+        "no-async-promise-executor": "warn",
         "no-console": [
             "warn",
             {
@@ -68,30 +96,61 @@
             }
         ],
         "no-debugger": "warn",
+        "no-dupe-else-if": "warn",
         "no-duplicate-imports": "warn",
+        "no-extra-boolean-cast": "warn",
         "no-template-curly-in-string": "warn",
         "no-trailing-spaces": "warn",
         "no-undef-init": "warn",
+        "no-empty-character-class": "warn",
+        "no-empty-pattern": "warn",
+        "no-func-assign": "warn",
+        "no-invalid-regexp": "warn",
+        "no-irregular-whitespace": [
+            "warn",
+            {
+                "skipStrings": true,
+                "skipRegExps": true,
+                "skipTemplates": true
+            }
+        ],
+        "no-misleading-character-class": "warn",
+        "no-unexpected-multiline": "warn",
+        "no-useless-backreference": "warn",
         "one-var": [
             "warn",
             "never"
         ],
         "prefer-const": "warn",
-        "quotes": [
-            "warn",
-            "double",
-            {
-                "avoidEscape": true,
-                "allowTemplateLiterals": true
-            }
-        ],
+        "prefer-object-spread": "warn",
         "spaced-comment": [
             "warn",
             "always",
             {
-                "markers": [
-                    "/"
-                ]
+                "line": {
+                    "markers": [
+                        "/"
+                    ],
+                    "exceptions": [
+                        "-",
+                        "+"
+                    ]
+                },
+                "block": {
+                    "markers": [
+                        "!"
+                    ],
+                    "exceptions": [
+                        "*"
+                    ]
+                }
+            }
+        ],
+        "yoda": [
+            "warn",
+            "never",
+            {
+                "onlyEquality": true
             }
         ]
     }

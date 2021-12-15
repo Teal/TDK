@@ -33,7 +33,7 @@ export function generateIcons(icons: string[], height?: number, postfix?: string
 		}
 		content = optimizeSVG(content, !!height, noColor)
 		const name = getName(icon, false).replace(/-(\w)/g, (_, word: string) => word.toUpperCase())
-		code += `/** ![${name}](${encodeDataURI("image/svg+xml", `<svg xmlns="http://www.w3.org/2000/svg"${height ? ` viewBox="0 0 ${height} ${height}"` : ""} width="1em" height="1em" fill="#D73A49">${content}</svg>`)}) */\n`
+		code += `/** ![${name}](${encodeDataURI("image/svg+xml", `<svg xmlns="http://www.w3.org/2000/svg"${height ? ` viewBox="0 0 ${height} ${height}"` : ""} width="1em" height="1em" fill="#D73A49">${content.replace(/"currentColor"/g, '"#D73A49"')}</svg>`)}) */\n`
 		code += `export const ${postfix ? name + postfix : name} = \`${content.replace(/[\`$]/g, "\\$&")}\`\n\n`
 		count++
 	}

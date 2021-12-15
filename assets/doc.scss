@@ -2289,29 +2289,29 @@ a.doc-card:hover {
 	line-height: 1.25;
 	text-align: center;
 	vertical-align: middle;
-
-	&.doc-large {
-		min-width: 12rem;
-		min-height: 12rem;
-	}
-
-	&.doc-small {
-		min-width: 3rem;
-		min-height: 3rem;
-	}
-
-	@mixin state($state, $background-color) {
-		&.doc-#{$state} {
-			border-color: $background-color;
-			color: $background-color;
-		}
-	}
-
-	@include state(info, $doc-info-color);
-	@include state(success, $doc-success-color);
-	@include state(warning, $doc-warning-color);
-	@include state(error, $doc-error-color);
 }
+
+.doc-box-large {
+	min-width: 12rem;
+	min-height: 12rem;
+}
+
+.doc-box-small {
+	min-width: 3rem;
+	min-height: 3rem;
+}
+
+@mixin doc-box-state($state, $background-color) {
+	.doc-box-#{$state} {
+		border-color: $background-color;
+		color: $background-color;
+	}
+}
+
+@include doc-box-state(info, $doc-info-color);
+@include doc-box-state(success, $doc-success-color);
+@include doc-box-state(warning, $doc-warning-color);
+@include doc-box-state(error, $doc-error-color);
 
 .doc-clear {
 	&::after {
