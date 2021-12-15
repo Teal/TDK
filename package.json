@@ -51,7 +51,7 @@
     "prepublishOnly": "npm run build",
     "build": "tsc -p tsconfig.json --declaration",
     "watch": "nodemon -e ts,tsx,json -T ./src/cli.ts start",
-    "tdk": "ts-node -T ./src/cli.ts ",
+    "tdk": "ts-node -T ./src/cli.ts",
     "test": "mocha -r ts-node/register/transpile-only --ui exports **/*.test.ts",
     "coverage": "node -e \"process.argv[8] = require.resolve('mocha/bin/mocha'); if (process.argv[14]) { process.argv[13] = process.argv[14].replace(/^src([\\\\/].*)\\.ts/, 'test$' + '1.test.ts'); process.argv.splice(14, 1) } require('nyc/bin/nyc')\" nyc --reporter=text-summary --reporter=html --report-dir=coverage --temp-dir=coverage/.nyc_output --extension=.ts --include=src/** mocha -r ts-node/register/transpile-only --ui exports **/*.test.ts"
   },

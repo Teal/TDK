@@ -422,7 +422,7 @@ export class TypeScriptCompiler {
 	 * @param containingFile 所在的文件
 	 */
 	resolveJSModuleName(moduleName: string, containingFile: string) {
-		return ts.tryResolveJSModule(moduleName, containingFile, this.compilerHost)
+		return ts.tryResolveJSModule(moduleName, containingFile, this.compilerHost)?.resolvedFileName
 	}
 
 }
@@ -593,7 +593,7 @@ declare module "typescript" {
 	function createGetCanonicalFileName(forceConsistentCasingInFileNames: boolean): (s: string) => string
 	function fileExtensionIs(path: string, ext: string): boolean
 	function toPath(fileName: string, cwd: string, getCanonicalFileName: ReturnType<typeof createGetCanonicalFileName>): Path
-	function tryResolveJSModule(moduleName: string, initialDir: string, host: CompilerHost): string | null
+	function tryResolveJSModule(moduleName: string, initialDir: string, host: CompilerHost): ResolvedModule | null
 	var optionDeclarations: { name: string, type: string | ESMap<string, number>, element?: (typeof optionDeclarations)[0], isFilePath?: boolean }[]
 	function normalizePath(path: string): Path
 	interface System {

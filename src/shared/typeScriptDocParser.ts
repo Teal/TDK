@@ -1,5 +1,6 @@
 import { resolve, relative } from "path"
 import * as ts from "typescript"
+import { node } from "webpack"
 
 /** 表示一个 TypeScript 文档解析器 */
 export class TypeScriptDocParser {
@@ -97,7 +98,7 @@ export class TypeScriptDocParser {
 			}
 			this.sortMembers(result.members)
 			return result
-		})
+		}, (sourceFile, result) => { })
 	}
 
 	/**
@@ -253,6 +254,8 @@ export class TypeScriptDocParser {
 			}
 			// 不支持的成员
 			this.parseMemberBase<DocUnknownMember>(symbol, symbol, declaration, DocMemberType.unknown, result)
+		}, (symbol, result) => {
+			this.parseMemberBase<DocUnknownMember>(symbol, symbol, undefined, DocMemberType.unknown, result)
 		})
 	}
 
@@ -767,9 +770,15 @@ export class TypeScriptDocParser {
 				result.name = (type as ts.IntrinsicType).intrinsicName as DocNativeType["name"]
 				return
 			}
-			// 枚举/枚举字面量
-			if (flags & ts.TypeFlags.EnumLike) {
-				this.parseTypeBase<DocReferenceType>(type, flags & ts.TypeFlags.Enum ? DocTypeType.enum : DocTypeType.enumMember, result)
+			// 枚举
+			if (flags & ts.TypeFlags.Enum || flags & ts.TypeFlags.EnumLiteral && flags & ts.TypeFlags.Union && type.getSymbol()?.flags & ts.SymbolFlags.Enum) {
+				this.parseTypeBase<DocReferenceType>(type, DocTypeType.enum, result)
+				result.member = this.getDocMember(type.getSymbol())
+				return
+			}
+			// 枚举字面量
+			if (flags & ts.TypeFlags.EnumLiteral) {
+				this.parseTypeBase<DocReferenceType>(type, DocTypeType.enumMember, result)
 				result.member = this.getDocMember(type.getSymbol())
 				return
 			}
@@ -940,6 +949,8 @@ export class TypeScriptDocParser {
 			}
 			// 不支持的类型
 			this.parseTypeBase<DocUnknownType>(type, DocTypeType.unknown, result)
+		}, (type, result) => {
+			this.parseTypeBase<DocUnknownType>(type, DocTypeType.unknown, result)
 		})
 	}
 
@@ -961,7 +972,7 @@ export class TypeScriptDocParser {
 	private _parseDepth = 0
 
 	/** 解析数据并缓存 */
-	private _parseCached<T, R extends { raw: T }>(node: T, parser: (node: T, result: R) => void) {
+	private _parseCached<T, R extends { raw: T }>(node: T, parser: (node: T, result: R) => void, onError: (node: T, result: R) => void) {
 		const cached = node[TypeScriptDocParser._docKey]
 		if (cached) {
 			return cached as R
@@ -973,6 +984,7 @@ export class TypeScriptDocParser {
 			this._parseDepth--
 		} else {
 			result.raw = node
+			onError(node, result)
 		}
 		return result
 	}

@@ -1543,7 +1543,7 @@ if (typeof exports !== "undefined") {
 	 * @param anchorMember 附加设置描点的成员
 	 */
 	protected renderDocMemberLink(member: DocMember, context: DocPageContext, anchorMember = member) {
-		const url = anchorMember.sourceLocation ? this.getDocURL(anchorMember.sourceLocation) : undefined
+		const url = anchorMember?.sourceLocation ? this.getDocURL(anchorMember.sourceLocation) : undefined
 		if (!url) {
 			return <code class="doc-token-class-name">{member.name}</code>
 		}

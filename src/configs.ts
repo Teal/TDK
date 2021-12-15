@@ -59,6 +59,9 @@ export function readConfigs(path = "package.json") {
 		{ label: "资源", href: "resources/" },
 		{ label: "工具", href: "tools/" },
 	].filter(t => dirs.includes(t.href.slice(0, -1)))
+	if (!doc.navbar.length) {
+		doc.navbar.push(...dirs.filter(d => !d.includes(".") && d !== "node_modules" && !d.includes("_")).map(d => ({ label: d, href: d + '/' })))
+	}
 	doc.introDescription = pkg.description
 	doc.introButtons ??= [{
 		label: "快速开始",
