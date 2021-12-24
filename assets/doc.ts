@@ -342,7 +342,7 @@ namespace DOC {
 						subtitle: content,
 						subtitleMatch: match
 					})
-					break
+					continue
 				}
 			}
 			result.sort((x, y) => {
