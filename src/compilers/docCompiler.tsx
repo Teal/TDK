@@ -1998,6 +1998,17 @@ if (typeof exports !== "undefined") {
 		if (rendered.has(type)) {
 			return null
 		}
+		// 忽略来自 lib.d.ts 的类型
+		if (type.raw.symbol) {
+			const declaration = type.raw.symbol.valueDeclaration ?? type.raw.symbol.declarations[0]
+			if (declaration) {
+				const sourceFile = declaration.getSourceFile()
+				if (sourceFile.hasNoDefaultLib) {
+					return null
+				}
+			}
+		}
+		// if (type)
 		const properties = context.docParser.getPropertiesOfType(type)
 		if (!properties.length) {
 			return null
