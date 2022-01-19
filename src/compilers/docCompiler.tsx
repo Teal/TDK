@@ -34,6 +34,7 @@ export class DocCompiler {
 		maxTOCLevel: 4,
 		counter: true,
 		backToTop: true,
+		apiDoc: true
 	}
 
 	/**
@@ -444,7 +445,7 @@ if (typeof exports !== "undefined") {
 		// 生成 API 文档
 		let api: any
 		let loader = ""
-		if (meta.api !== false) {
+		if (meta.api !== false && this.options.apiDoc !== false) {
 			const jsAsset = await this.builder.getAsset(setExt(context.sourceURL, ".js"))
 			context.dependencies.push(...jsAsset.dependencies)
 			if (jsAsset.type === AssetType.file) {
@@ -2751,6 +2752,9 @@ export interface DocCompilerOptions {
 	injectHead?: string
 	/** 生成的文档末尾插入的 HTML 代码，比如放入一些统计代码 */
 	injectFoot?: string
+
+	/** 是否启用 API 文档生成 */
+	apiDoc?: boolean
 
 	/** 自动生成索引的最大标题等级（1-6）（默认 4） */
 	maxTOCLevel?: number
