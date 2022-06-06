@@ -42,6 +42,7 @@ namespace DOC {
 				const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>("a")
 				if (!anchor
 					|| anchor.target && anchor.target !== "_self"
+					|| !anchor.getAttribute("href")
 					|| anchor.getAttribute("href").startsWith("#")
 					|| !anchor.pathname.startsWith(pageData.baseURL + pageData.pageIndexRoot)
 					|| anchor.protocol !== location.protocol
@@ -376,7 +377,7 @@ namespace DOC {
 			if (!searchResult.length) {
 				return `<li><label class="doc-tip"><svg class="doc-icon doc-icon-space-right" viewBox="0 0 24 24"><use xlink:href="${pageData.baseURL}tdk/assets/icons.svg#info"></use></svg>无匹配结果</label></li>`
 			}
-			return searchResult.map(item => `<li><a href="${encodeHTML(pageData.baseURL + item.url)}">${formatMatch(item.title, item.titleMatch)}${item.subtitle ? `<small>${formatMatch(item.subtitle, item.subtitleMatch)}</small>` : ""}`).join("")
+			return searchResult.map((item, index) => `<li${index ? "" : ` class="doc-selected"`}><a href="${encodeHTML(pageData.baseURL + item.url)}">${formatMatch(item.title, item.titleMatch)}${item.subtitle ? `<small>${formatMatch(item.subtitle, item.subtitleMatch)}</small>` : ""}`).join("")
 		}
 	}
 

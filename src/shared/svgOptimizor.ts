@@ -1,4 +1,4 @@
-import { optimize } from "svgo"
+import { optimize, Plugin } from "svgo"
 
 /**
  * 压缩优化指定的 `<svg>` 图标
@@ -6,7 +6,7 @@ import { optimize } from "svgo"
  * @param removeRoot 是否删除根节点
  * @param removeColor 是否删除颜色
  */
-export function optimizeSVG(svg: string, removeRoot?: boolean, removeColor?: boolean): string {
+export function optimizeSVG(svg: string, removeRoot?: boolean, removeColor?: boolean, removeTitle?: boolean, getViewBox?: (viewBox: string) => void): string {
 	const result = optimize(svg, {
 		full: true,
 		plugins: [
@@ -15,7 +15,7 @@ export function optimizeSVG(svg: string, removeRoot?: boolean, removeColor?: boo
 			"removeXMLProcInst",
 			"removeComments",
 			"removeMetadata",
-			"removeTitle",
+			...(removeTitle ? ["removeTitle" as Plugin] : []),
 			"removeDesc",
 			"removeUselessDefs",
 			"removeEditorsNSData",
@@ -57,13 +57,19 @@ export function optimizeSVG(svg: string, removeRoot?: boolean, removeColor?: boo
 			removeRoot ? {
 				name: "cleanRoot",
 				type: "full",
-				fn(data: any) {
-					if (data.children && data.children[0].name === "svg") {
-						data.children = data.children[0].children
-					} else if (data.content) {
-						data.content = data.content[0].content
+				fn(item: any) {
+					if (item.type === "root") {
+						if (item.children && item.children.length === 1 && item.children[0].name === "svg") {
+							if (getViewBox) {
+								const viewBox = item.attr("viewBox")?.value
+								viewBox && getViewBox(viewBox)
+							}
+							item.children = item.children[0].children
+						} else if (item.content) {
+							item.content = item.content[0].content
+						}
 					}
-					return data
+					return item
 				}
 			} : {
 				name: "cleanRoot",

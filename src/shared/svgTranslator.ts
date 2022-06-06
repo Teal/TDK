@@ -5,21 +5,24 @@ import { parser as createXMLParser } from "sax"
  * 移动和缩放一个 `<svg>`
  * @param svg 要转换的 `<svg>` 源码
  * @param height 转换后的高度，宽度将根据当前比例自动缩放
- * @param center 是否确保整体居中
+ * @param minWidth 最小宽度
  * @param offsetY 垂直的偏移
  * @param offsetX 水平的偏移
  */
-export function translateSVG(svg: string, height: number, center = true, offsetY = 0, offsetX = 0) {
+export function translateSVG(svg: string, height: number, minWidth = 0, offsetY = 0, offsetX = 0) {
 	let result = `<?xml version="1.0"?>`
 	const context = {}
 	const parser = createXMLParser(true)
 	parser.onopentag = (node: any) => {
-		transformNode(node, height, center, offsetY, offsetX, context)
+		transformNode(node, height, minWidth, offsetY, offsetX, context)
 		result += `<${node.name}`
 		for (const key in node.attributes) {
 			result += ` ${key}="${String(node.attributes[key]).replace('"', "&quot;")}"`
 		}
 		result += ">"
+	}
+	parser.ontext = (text: string) => {
+		result += text
 	}
 	parser.onclosetag = (nodeName: any) => {
 		result += `</${nodeName}>`
@@ -28,7 +31,7 @@ export function translateSVG(svg: string, height: number, center = true, offsetY
 	return result
 }
 
-function transformNode(node: any, height: number, center: boolean, offsetY: number, offsetX: number, context: any) {
+function transformNode(node: any, height: number, minWidth: number, offsetY: number, offsetX: number, context: any) {
 	switch (node.name) {
 		case "svg":
 		case "symbol":
@@ -46,20 +49,16 @@ function transformNode(node: any, height: number, center: boolean, offsetY: numb
 				originalWidth = parseFloat(node.attributes.width) || height
 				originalHeight = parseFloat(node.attributes.height) || height
 			}
-			context.scale = height / originalHeight
 			context.offsetX = -originalX + offsetX
 			context.offsetY = -originalY + offsetY
-			let width = height
-			if (center) {
-				if (originalWidth > originalHeight) {
-					context.offsetY += (originalWidth - originalHeight) / 2
-				} else if (originalWidth < originalHeight) {
-					context.offsetX += (originalHeight - originalWidth) / 2
-				}
-			} else if (originalWidth !== originalHeight) {
-				width = originalWidth * context.scale
+			context.scale = height / originalHeight
+			let width = Math.round(originalWidth * context.scale * 10000) / 10000
+			if (width < minWidth) {
+				context.offsetX += (minWidth - width) / 2
+				width = minWidth
+			} else {
+				width = Math.round(originalWidth * context.scale * 10000) / 10000
 			}
-
 			node.attributes.viewBox = [
 				0,
 				0,
@@ -109,5 +108,10 @@ function transformNode(node: any, height: number, center: boolean, offsetY: numb
 				})
 				.join(" ")
 			break
+	}
+	if (node.attributes.transform) {
+		node.attributes.transform = node.attributes.transform.replace(/(matrix\([\+\-\d\.]+[\s,]+[\+\-\d\.]+[\s,]+[\+\-\d\.]+[\s,]+[\+\-\d\.]+[\s,]+|translate\()([\+\-\d\.]+)([\s,]+)([\+\-\d\.]+)\)/g, (all: string, prefix: string, tx: string, comma: string, ty: string) => {
+			return `${prefix}${+tx * context.scale}${comma}${+ty * context.scale})`
+		})
 	}
 }

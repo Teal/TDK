@@ -14,7 +14,9 @@ export default async function (options: any) {
 		inputs.push(options[i])
 	}
 	const outputFile = options["-o"] ?? options["--out"]
-	const { code, count } = generateIcons(glob(inputs), options["--height"], options["--postfix"], options["--noColor"])
+	const height = +options["--height"] || undefined
+	const minWidth = options["--minWidth"] ? +options["--minWidth"] : height
+	const { code, count } = generateIcons(glob(inputs), height, minWidth, options["--postfix"], options["--removeColor"], options["--removeTitle"])
 	writeFile(outputFile, code)
 	console.info(`图标文件已生成：${outputFile}(共 ${count} 个)`)
 }
@@ -23,17 +25,21 @@ export default async function (options: any) {
  * 生成图标文件
  * @param icons 所有图标 
  */
-export function generateIcons(icons: string[], height?: number, postfix?: string, noColor?: boolean) {
+export function generateIcons(icons: string[], height?: number, minWidth?: number, postfix?: string, removeColor?: boolean, removeTitle?: boolean) {
 	let code = ""
 	let count = 0
 	for (const icon of icons) {
 		let content = readText(icon)
 		if (height) {
-			content = translateSVG(content, height)
+			content = translateSVG(content, height, minWidth)
 		}
-		content = optimizeSVG(content, !!height, noColor)
+		let viewBox: string
+		content = optimizeSVG(content, !!height, removeColor, removeTitle, data => {
+			viewBox = data
+		})
 		const name = getName(icon, false).replace(/-(\w)/g, (_, word: string) => word.toUpperCase())
-		code += `/** ![${name}](${encodeDataURI("image/svg+xml", `<svg xmlns="http://www.w3.org/2000/svg"${height ? ` viewBox="0 0 ${height} ${height}"` : ""} width="1em" height="1em" fill="#D73A49">${content.replace(/"currentColor"/g, '"#D73A49"')}</svg>`)}) */\n`
+		const mdContent = content.replace(/"currentColor"/g, '"#D73A49"')
+		code += `/** ![${name}](${encodeDataURI("image/svg+xml", `<svg xmlns="http://www.w3.org/2000/svg"${viewBox ? ` viewBox="${viewBox}` : ""} height="1em" fill="#D73A49">${mdContent}</svg>`)}) */\n`
 		code += `export const ${postfix ? name + postfix : name} = \`${content.replace(/[\`$]/g, "\\$&")}\`\n\n`
 		count++
 	}
