@@ -1,6 +1,5 @@
 import { resolve, relative } from "path"
 import * as ts from "typescript"
-import { node } from "webpack"
 
 /** 表示一个 TypeScript 文档解析器 */
 export class TypeScriptDocParser {
